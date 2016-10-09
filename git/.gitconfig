@@ -1,0 +1,7 @@
+[user]
+	email = mario.uriarte@gmail.com
+	name = Mario Uriarte
+[core]
+	editor = nvim
+[merge]
+	tool = vimdiff
