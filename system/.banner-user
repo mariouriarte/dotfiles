@@ -1,0 +1,9 @@
+OS=$(uname -s)
+ARCH=$(uname -m)
+VER=$(uname -r)
+echo '                _                             /\_/\ '
+echo '    __ __ _____| |__ ___ _ __  ___       ____/ o o \'
+echo '    \ V  V / -_) / _/ _ \    \/ -_)    /~____  =ø= /'
+echo '     \_/\_/\___|_\__\___/_|_|_\___|   (______)__m_m)'
+echo ">   Estas en $HOST - $USER en ARCH $OS"
+echo ''
