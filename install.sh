@@ -1,4 +1,5 @@
 ln -sfv /home/mario/dotfiles/oh-my-zsh/themes/rioma.zsh-theme ~/.oh-my-zsh/themes
+ln -sfv /home/mario/dotfiles/oh-my-zsh/themes/agnoster-rioma.zsh-theme ~/.oh-my-zsh/themes
 
 ln -sfv /home/mario/dotfiles/runcom/.zshrc ~
 
