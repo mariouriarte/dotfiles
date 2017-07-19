@@ -9,9 +9,10 @@
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 #ZSH_THEME="robbyrussell"
 
-ZSH_THEME="agnoster-rioma"
+#ZSH_THEME="agnoster-rioma"
 
 #ZSH_THEME="lambda-mod-rioma"
+ZSH_THEME="senzshell"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"

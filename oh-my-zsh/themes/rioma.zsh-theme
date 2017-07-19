@@ -1,5 +1,5 @@
 source ~/.banner-user
-PROMPT='%{$fg[magenta]%}[%c] $(git_prompt_info)$(hg_prompt_info)%{$reset_color%}  '
+PROMPT='%{$fg[magenta]%}[%c] $(git_prompt_info)$(hg_prompt_info)%{$reset_color%} '
 
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$reset_color%}%{$fg[yellow]%}["
 ZSH_THEME_GIT_PROMPT_SUFFIX="]%{$reset_color%}"

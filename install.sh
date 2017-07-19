@@ -4,7 +4,7 @@ ln -sfv /home/mario/dotfiles/oh-my-zsh/themes/agnoster-rioma.zsh-theme ~/.oh-my-
 
 ln -sfv /home/mario/dotfiles/oh-my-zsh/themes/hyperzsh.zsh-theme ~/.oh-my-zsh/themes
 ln -sfv /home/mario/dotfiles/oh-my-zsh/themes/lambda-mod.zsh-theme ~/.oh-my-zsh/themes
-ln -sfv /home/mario/dotfiles/oh-my-zsh/themes/lambda-mod.zsh-theme ~/.oh-my-zsh/themes
+ln -sfv /home/mario/dotfiles/oh-my-zsh/themes/senzshell.zsh-theme ~/.oh-my-zsh/themes
 
 # themes konsole
 cp ~/dotfiles/konsole/themes/* ~/.local/share/konsole
