@@ -19,7 +19,7 @@ function battery_charge() {
 function put_spacing() {
   local git=$(git_prompt_info)
   if [ ${#git} != 0 ]; then
-    ((git=${#git} - 5))
+    ((git=${#git} - 10))
   else
     git=0
   fi
@@ -32,7 +32,7 @@ function put_spacing() {
   fi
 
   local termwidth
-  (( termwidth = ${COLUMNS} - 10 - ${#HOST} - ${#$(get_pwd)} - ${bat} - ${git} ))
+  (( termwidth = ${COLUMNS} - 15 - ${#HOST} - ${#$(get_pwd)} - ${bat} - ${git} ))
 
   local spacing=""
   for i in {1..$termwidth}; do
