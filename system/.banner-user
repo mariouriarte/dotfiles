@@ -1,9 +1,15 @@
 OS=$(uname -s)
 ARCH=$(uname -m)
 VER=$(uname -r)
-echo '                _                             /\_/\ '
-echo '    __ __ _____| |__ ___ _ __  ___       ____/ o o \'
-echo '    \ V  V / -_) / _/ _ \    \/ -_)    /~____  =ø= /'
-echo '     \_/\_/\___|_\__\___/_|_|_\___|   (______)__m_m)'
-echo ">   Bienvenido de vuelta $USER estas en $HOST $OS"
+MACHINE=$(hostname)
+#echo '                _                             /\_/\ '
+#echo '    __ __ _____| |__ ___ _ __  ___       ____/ o o \'
+#echo '    \ V  V / -_) / _/ _ \    \/ -_)    /~____  =ø= /'
+#echo '     \_/\_/\___|_\__\___/_|_|_\___|   (______)__m_m)'
 echo ''
+echo "    Bienvenido de vuelta $USER estas en $MACHINE"
+echo ''
+echo '          ___       __   __         ___     __        __       '
+echo '    |  | |__  |    /  ` /  \  |\/| |__     |__)  /\  /  ` |__/ '
+echo '    |/\| |___ |___ \__, \__/  |  | |___    |__) /~~\ \__, |  \ '
+                                                           
