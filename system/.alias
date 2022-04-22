@@ -2,5 +2,7 @@
 # ~/.alias
 # mario uriarte
 
-alias reg-access-log="sudo tailf -n 5 /var/log/httpd/regulariza-access_log | ccze"
 alias vim="nvim"
+alias gits="git status"
+alias gita="git add ."
+alias gitc="git commit"

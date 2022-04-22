@@ -1,7 +1,15 @@
 [user]
 	email = mario.uriarte@gmail.com
-	name = mario
+	name = Mario Uriarte
 [core]
-	editor = nvim
+	editor = vim
 [merge]
 	tool = vimdiff
+[color]
+	ui = true
+[pull]
+	rebase = true
+[fetch]
+	prune = true
+[diff]
+	colorMoved = zebra
