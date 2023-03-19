@@ -7,9 +7,8 @@ echo '    __ __ _____| |__ ___ _ __  ___       ____/ o o \'
 echo '    \ V  V / -_) / _/ _ \    \/ -_)    /~____  =ø= /'
 echo '     \_/\_/\___|_\__\___/_|_|_\___|   (______)__m_m)'
 echo ''
-echo "  Bienvenido de vuelta «$USER», maquina «${MACHINE^^}»"
+echo "  Wellcome back «$USER». Machine «${MACHINE^^}»"
 #echo ''
 #echo '        ___       __   __         ___     __        __       '
 #echo '  |  | |__  |    /  ` /  \  |\/| |__     |__)  /\  /  ` |__/ '
 #echo '  |/\| |___ |___ \__, \__/  |  | |___    |__) /--\ \__, |  \ '
-                                                           

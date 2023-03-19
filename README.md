@@ -1,14 +1,8 @@
-Installation:
+# Awesom DOTFILE
+
+    Una lista seleccionada de recursos de dotfiles.
+
+
+# Installation:
 
     git clone git@gitlab.com:mario.uriarte/dotfiles.git ~/dotfiles
-
-Create symlinks:
-
-    ln -s ~/.vim/vimrc ~/.vimrc
-    ln -s ~/.vim/gvimrc ~/.gvimrc
-
-Switch to the `~/.vim` directory, and fetch submodules:
-
-    cd ~/.vim
-    git submodule init
-    git submodule update

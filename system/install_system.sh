@@ -68,13 +68,13 @@
 ##phppgadmin
 #sudo pacman -S phppgadmin
 #sudo touch /etc/httpd/conf/extra/phppgadmin.conf
-echo 'Alias /phppgadmin "/usr/share/webapps/phppgadmin"' | sudo tee --append /etc/httpd/conf/extra/phppgadmin.conf > /dev/null
-echo '<Directory "/usr/share/webapps/phppgadmin">' | sudo tee --append /etc/httpd/conf/extra/phppgadmin.conf > /dev/null
-echo '    DirectoryIndex index.php' | sudo tee --append /etc/httpd/conf/extra/phppgadmin.conf > /dev/null
-echo '    AllowOverride All' | sudo tee --append /etc/httpd/conf/extra/phppgadmin.conf > /dev/null
-echo '    Options FollowSymlinks' | sudo tee --append /etc/httpd/conf/extra/phppgadmin.conf > /dev/null
-echo '    Require all granted' | sudo tee --append /etc/httpd/conf/extra/phppgadmin.conf > /dev/null
-echo '</Directory>' | sudo tee --append /etc/httpd/conf/extra/phppgadmin.conf > /dev/null
+# echo 'Alias /phppgadmin "/usr/share/webapps/phppgadmin"' | sudo tee --append /etc/httpd/conf/extra/phppgadmin.conf > /dev/null
+# echo '<Directory "/usr/share/webapps/phppgadmin">' | sudo tee --append /etc/httpd/conf/extra/phppgadmin.conf > /dev/null
+# echo '    DirectoryIndex index.php' | sudo tee --append /etc/httpd/conf/extra/phppgadmin.conf > /dev/null
+# echo '    AllowOverride All' | sudo tee --append /etc/httpd/conf/extra/phppgadmin.conf > /dev/null
+# echo '    Options FollowSymlinks' | sudo tee --append /etc/httpd/conf/extra/phppgadmin.conf > /dev/null
+# echo '    Require all granted' | sudo tee --append /etc/httpd/conf/extra/phppgadmin.conf > /dev/null
+# echo '</Directory>' | sudo tee --append /etc/httpd/conf/extra/phppgadmin.conf > /dev/null
 #
 #echo '# phpPgAdmin configuration'  | sudo tee --append /etc/httpd/conf/httpd.conf > /dev/null
 #echo 'Include conf/extra/phppgadmin.conf'  | sudo tee --append /etc/httpd/conf/httpd.conf > /dev/null

@@ -1,4 +1,5 @@
 #!/bin/sh
+echo "Install manjaro Apps"
 
 # sudo pacman-mirrors --fasttrack
 # sudo pacman -Syyu --noconfirm
@@ -23,7 +24,7 @@
 #     community/intellij-idea-community-edition
 #     gimp \
 #     thunderbird \
-#     libreoffice \    
+#     libreoffice \
 #     vivaldi \
 #     opera \
 #     brave-browser \
@@ -35,8 +36,8 @@
 #     spotify-launcher \
 
 # yay -S --noconfirm ttf-ms-win10-auto
-yay -S --noconfirm \
-    aur/jaspersoftstudio
+# yay -S --noconfirm \
+#     aur/jaspersoftstudio
     # aur/git-cola
     # aur/eclipse-java \
     # aur/mailspring \
@@ -49,7 +50,7 @@ yay -S --noconfirm \
     # google-chrome \
     # aur/phpstorm \
     # multilib/steam-native-runtime
-    
+
 # confi
 # echo "> Set configurations..."
 # echo ""
