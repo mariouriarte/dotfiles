@@ -19,7 +19,7 @@ echo "Install manjaro Apps"
 
 # sudo pacman -S --noconfirm \
 #     keepassxc
-    # gitg
+#     gitg
 #     filezilla \
 #     community/intellij-idea-community-edition
 #     gimp \
@@ -36,9 +36,10 @@ echo "Install manjaro Apps"
 #     spotify-launcher \
 
 # yay -S --noconfirm ttf-ms-win10-auto
-# yay -S --noconfirm \
-#     aur/jaspersoftstudio
-    # aur/git-cola
+ yay -S --noconfirm \
+    aur/jaspersoftstudio
+    # aur/dry-bin \    
+    # aur/git-cola \
     # aur/eclipse-java \
     # aur/mailspring \
     # aur/slack-desktop \
