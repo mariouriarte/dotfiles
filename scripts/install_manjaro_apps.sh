@@ -1,30 +1,15 @@
-#!/bin/sh
+#!/bin/bash
 echo "Install manjaro Apps"
 
 sudo pacman-mirrors --fasttrack
 sudo pacman -Syyu --noconfirm
 
+# install common apps
 sudo pacman -S --noconfirm \
     yay \
-    docker docker-compose \
-    apache \
-    mariadb \
-    php php-apache \
-    wget \
     samba \
-    vim neovim \
-    git \
-    base-devel \
-    xclip unzip unrar \
-    openssh \
-
-
-sudo pacman -S --noconfirm \
+    xclip unzip unrar\
     keepassxc \
-    gitg \
-    filezilla \
-    community/intellij-idea-community-edition \
-    gimp \
     thunderbird \
     libreoffice \
     vivaldi \
@@ -32,30 +17,41 @@ sudo pacman -S --noconfirm \
     brave-browser \
     kate \
     krite \
-    amarok \
     vlc \
     zsh \
     spotify-launcher \
 
+# install dev apps
+sudo pacman -S --noconfirm \
+    gimp \
+    visual-studio-code-bin \
+    docker docker-compose \
+    apache \
+    wget \
+    vim neovim \
+    git gitg\
+    base-devel \
+    community/intellij-idea-community-edition \
+    filezilla \
+    aur/dry-bin \
+
+
 yay -S --noconfirm ttf-ms-win10-auto
 yay -S --noconfirm \
-    aur/dry-bin \
-    aur/git-cola \
-    aur/eclipse-java \
+    aur/jaspersoftstudio \
     aur/mailspring \
     aur/slack-desktop \
     community/discord \
-    visual-studio-code-bin \
     jdk11-openjdk \
     jdk17-openjdk \
     latte-dock-git \
     google-chrome \
     aur/phpstorm \
     multilib/steam-native-runtime \
-    aur/jaspersoftstudio \
+    aur/bedstead-fonts-powerline
 
 # confi
-echo "> Set configurations..."
-echo ""
-sudo systemctl start docker.service
-sudo systemctl enable docker.service
+# echo "> Set configurations..."
+# echo ""
+# sudo systemctl start docker.service
+# sudo systemctl enable docker.service
