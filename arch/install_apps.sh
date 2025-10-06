@@ -8,8 +8,7 @@ echo "Install normal Apps"
 sudo pacman -Sy --noconfirm vim \
     base-devel \
     samba \
-    xclip unzip unrar\
-    keepassxc \
+    xclip unzip unrar keepassxc \
     thunderbird \
     vivaldi \
     kate \
@@ -17,11 +16,8 @@ sudo pacman -Sy --noconfirm vim \
     vlc \
     spotify-launcher \
     gimp \
-    docker \
-    docker-compose \
     apache \
     wget \
-    neovim \
     git \
     gitg \
     filezilla \
@@ -30,20 +26,10 @@ sudo pacman -Sy --noconfirm vim \
     metronome \
     libreoffice \
     podman \
+    podman-desktop \
     audacious \
     obsidian \
-    system-config-printer
-
-sudo systemctl enable docker.service
-sudo systemctl start docker.service
-sudo usermod -aG docker $USER
+    system-config-printer \
+    btop
 
 sudo systemctl enable sshd.service
-
-
-
-# confi
-# echo "> Set configurations..."
-# echo ""
-# sudo systemctl start docker.service
-# sudo systemctl enable docker.service

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo pacman -S --noconfirm nvim
+sudo pacman -S --noconfirm neovim
 sudo pacman -S --noconfirm fd
 
 # required

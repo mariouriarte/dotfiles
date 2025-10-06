@@ -14,7 +14,6 @@ yay -S --noconfirm brave-bin \
     deemix \
     deemix-gui-git \
     onedrive-abraunegg \
-    podman-desktop \
     samsung-unified-driver-printer \
     cups-pdf \
     code \
