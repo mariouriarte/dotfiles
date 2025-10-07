@@ -1,5 +1,0 @@
-#!/bin/bash
-
-echo '> Python dbibackend...'
-sudo python Games/switch/dbibackend/dbibackend/dbibackend.py ~/Games/switch/roms
-#sudo python Games/switch/dbibackend/dbibackend/dbibackend.py ~/Games/switch/Downloads
