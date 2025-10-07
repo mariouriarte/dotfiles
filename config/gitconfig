@@ -1,0 +1,17 @@
+[user]
+	email = mario.uriarte@gmail.com
+	name = Mario Uriarte
+[core]
+	editor = vim
+[merge]
+	tool = vimdiff
+[color]
+	ui = true
+[pull]
+	rebase = true
+[fetch]
+	prune = true
+[diff]
+	colorMoved = zebra
+[init]
+	defaultBranch = main
