@@ -34,23 +34,31 @@
 --})
 
 -- in your init.lua or a dedicated plugin file
+--return {
+--	-- ... other plugins
+--	{
+--		"olimorris/onedarkpro.nvim",
+--		lazy = false, -- Make sure it loads immediately
+--		priority = 1000, -- Set a high priority to load it early
+--		config = function()
+--			vim.cmd("colorscheme onedark")
+--			-- Optional: Further configuration for the theme
+--			--require("onedark").setup({
+--			--	-- your specific options here
+--			--	style = "warm", -- "dark", "darker", "cool", "deep", "warm", "transparent"
+--			--	toggle_style_key = "<leader>ts", -- keybind to toggle style or nil
+--			--	toggle_style_list = { "dark", "darker", "cool", "deep", "warm", "transparent" }, -- list of styles to toggle between
+--			--	-- ... other settings
+--			--})
+--		end,
+--	},
+--	-- ... other plugins
+--}
+
 return {
-	-- ... other plugins
-	{
-		"olimorris/onedarkpro.nvim",
-		lazy = false, -- Make sure it loads immediately
-		priority = 1000, -- Set a high priority to load it early
-		config = function()
-			vim.cmd("colorscheme onedark")
-			-- Optional: Further configuration for the theme
-			--require("onedark").setup({
-			--	-- your specific options here
-			--	style = "warm", -- "dark", "darker", "cool", "deep", "warm", "transparent"
-			--	toggle_style_key = "<leader>ts", -- keybind to toggle style or nil
-			--	toggle_style_list = { "dark", "darker", "cool", "deep", "warm", "transparent" }, -- list of styles to toggle between
-			--	-- ... other settings
-			--})
-		end,
-	},
-	-- ... other plugins
+	{ "ellisonleao/gruvbox.nvim" },
+	-- Configure LazyVim to load gruvbox (if using LazyVim)
+	{ "LazyVim/LazyVim", opts = {
+		colorscheme = "gruvbox",
+	} },
 }
