@@ -1,14 +1,11 @@
---return {
---	"folke/tokyonight.nvim",
---	lazy = false, -- Load this plugin eagerly as it's a colorscheme
---	priority = 1000, -- Ensure it loads before other plugins that might depend on colors
---	opts = {
---		style = "night", -- Choose your preferred style: "storm", "moon", "night", "day"
---		transparent = false, -- Set to true for a transparent background
---		terminal_colors = true, -- Enable terminal colors
---		-- Further customization options can be added here
---	},
---	config = function()
---		vim.cmd("colorscheme tokyonight")
---	end,
---}
+return {
+	{ "olimorris/onedarkpro.nvim", priority = 1000 },
+}
+
+--require("onedarkpro").setup({
+--  highlights = {
+--    Comment = { italic = true },
+--    Directory = { bold = true },
+--    ErrorMsg = { italic = true, bold = true }
+--  }
+--})
