@@ -10,16 +10,16 @@ return {
 				transparent = false,
 				code_style = {
 					comments = "italic",
-					keywords = "bold",
-					functions = "bold",
+					keywords = "none",
+					functions = "none",
 					strings = "none",
 					variables = "none",
 				},
 				--colors = {
-				--	red = "#E55561",
+				--	comment_gray = "#9198A1",
 				--},
 				--highlights = {
-				--	["@phpVarSelector"] = { fg = "@red" },
+				--	["@comment"] = { fg = "$comment_gray" },
 				--},
 			})
 			-- Enable theme
