@@ -6,7 +6,7 @@ return {
 		priority = 1000, -- make sure to load this before all the other start plugins
 		config = function()
 			require("onedark").setup({
-				style = "deep",
+				style = "cool",
 				transparent = false,
 				code_style = {
 					comments = "italic",
@@ -16,12 +16,10 @@ return {
 					variables = "none",
 				},
 				--colors = {
-				--	bright_orange = "#ff8800", -- define a new color
-				--	green = "#00ffaa", -- redefine an existing color
+				--	red = "#E55561",
 				--},
 				--highlights = {
-				--	--["@lsp.type.keyword"] = { this = "$green" },
-				--	["@lsp.type.variable.php"] = { this = "$green" },
+				--	["@phpVarSelector"] = { fg = "@red" },
 				--},
 			})
 			-- Enable theme
