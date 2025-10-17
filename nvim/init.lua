@@ -9,3 +9,4 @@ vim.o.shiftwidth = 4
 
 -- Change $ color for onedark
 --vim.cmd("highlight phpVarSelector guifg=#E55561 ctermfg=Red")
+--

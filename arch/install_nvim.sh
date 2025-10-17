@@ -2,15 +2,9 @@
 
 sudo pacman -S --noconfirm neovim
 sudo pacman -S --noconfirm fd
+sudo pacman -S --noconfirm tree-sitter
+sudo pacman -S --noconfirm tree-sitter-cli
 
-# required
-rm ~/.config/nvim
-rm ~/.local/share/nvim
-rm ~/.local/state/nvim
-rm ~/.cache/nvim
-
-git clone https://github.com/LazyVim/starter ~/.config/nvim
-rm -rf ~/.config/nvim/.git
-
-# Nvim Lazy config
-source "$(dirname "${BASH_SOURCE[0]}")/../nvim/install.sh" ${APP_ENV}
+yay -S --noconfirm tree-sitter-php
+yay -S --noconfirm aur/nodejs-intelephense
+# Nvim Lazy config --source "$(dirname "${BASH_SOURCE[0]}")/../nvim/install.sh" ${APP_ENV}
