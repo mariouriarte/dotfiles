@@ -1,10 +1,5 @@
 #!/bin/bash
 
-#cp nvim/init.lua ~/.config/nvim
-#cp -r nvim/lua/ ~/.config/nvim
-
-#sudo npm install -g tree-sitter-cli
-
 # requirte
 rm -rf ~/.config/nvim
 rm -rf ~/.local/share/nvim
