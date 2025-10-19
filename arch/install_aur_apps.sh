@@ -17,4 +17,5 @@ yay -S --noconfirm brave-bin \
     samsung-unified-driver-printer \
     cups-pdf \
     code \
-    dry-bin
+    dry-bin \
+    neofetch
