@@ -1,7 +1,7 @@
 [general]
 live_config_reload = true
 import = [
-  "~/.config/alacritty/themes/themes/midnight_haze.toml"
+  "~/.config/alacritty/themes/themes/ayu_dark.toml"
 ]
 
 [env]
@@ -10,13 +10,14 @@ TERM = "xterm-256color"
 [window]
 padding.x = 15
 padding.y = 15
+dynamic_padding = true
 
 dimensions.columns = 140
 dimensions.lines = 35
 
 decorations = "None"
 
-opacity = 0.85
+opacity = 0.9
 blur = true
 
 option_as_alt = "Both"
@@ -30,7 +31,3 @@ bindings = [
   { key = "F11", mods = "None", action = "ToggleMaximized" },
   { key = "F12", action = "ToggleViMode" },
 ]
-
-[colors.primary]
-background = "#1e1e2e"
-foreground = "#abb2bf"
