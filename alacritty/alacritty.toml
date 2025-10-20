@@ -30,3 +30,7 @@ bindings = [
   { key = "F11", mods = "None", action = "ToggleMaximized" },
   { key = "F12", action = "ToggleViMode" },
 ]
+
+[colors.primary]
+background = "#1e1e2e"
+foreground = "#abb2bf"
