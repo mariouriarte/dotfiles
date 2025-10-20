@@ -17,7 +17,11 @@ sudo apt install -y \
     neofetch \
     net-tools \
     unrar \
-    wget
+    wget \
+    nodejs \
+    gcc \
+    npm \
+    eza
 
 # ----------------------------------------------------
 # Sección Instalación de Alacritty
