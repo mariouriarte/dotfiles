@@ -16,6 +16,7 @@ alias stop="systemctl stop "
 alias ena="systemctl enable "
 
 alias ls="eza --icons=always"
+alias clr="clear"
 
 alias gco="git checkout"
 alias gs="git status"
@@ -34,6 +35,8 @@ alias dc="docker compose"
 
 alias his="history | grep"
 
+neofetch
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 # end-conf -->'
 
 cat <<EOF >>$HOME/.bashrc
@@ -47,6 +50,7 @@ EOF
 
 fi
 
+# quitar saltos de linea
 sed -i -e ':a' -e 'N' -e '$!ba' -e 's/\n\n/\n/g' $HOME/.zshrc
 sed -i -e ':a' -e 'N' -e '$!ba' -e 's/\n\n/\n/g' $HOME/.bashrc
 
