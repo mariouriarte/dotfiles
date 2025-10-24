@@ -1,6 +1,5 @@
 #!/bin/bash
 
-yay -S --noconfirm alacritty
-#yay -S --noconfirm aur/alacritty-themes
-yay -S --noconfirm fd
-yay -S --noconfirm ttf-meslo-nerd
+yay -S --noconfirm alacritty \
+    fd \
+    ttf-meslo-nerd
