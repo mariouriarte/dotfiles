@@ -20,7 +20,7 @@ alias ls="eza --icons=always"
 alias clr="clear"
 alias clr2="clear"
 alias clr232="clear"
-alias hola_mario="echo 'Hola mario'"
+alias hola_mario="echo Hola Mario"
 
 alias gco="git checkout"
 alias gs="git status"
