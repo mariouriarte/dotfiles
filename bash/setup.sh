@@ -7,6 +7,8 @@ sed -i -z 's/#<!--.*-->//g' $HOME/.zshrc
 sed -i -z 's/#<!--.*-->//g' $HOME/.bashrc
 
 multiline_string='#<!-- custom-conf
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+
 export VISUAL=vim
 export EDITOR=vim
 
@@ -18,8 +20,6 @@ alias ena="systemctl enable "
 
 alias ls="eza --icons=always"
 alias clr="clear"
-alias clr2="clear"
-alias clr232="clear"
 alias hola_mario="echo Hola Mario"
 
 alias gco="git checkout"
@@ -42,7 +42,6 @@ alias dc="docker compose"
 alias his="history | grep"
 
 neofetch
-typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
 # end-conf -->'
 
