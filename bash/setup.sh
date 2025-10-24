@@ -18,6 +18,7 @@ alias ena="systemctl enable "
 
 alias ls="eza --icons=always"
 alias clr="clear"
+alias clr2="clear"
 
 alias gco="git checkout"
 alias gs="git status"
