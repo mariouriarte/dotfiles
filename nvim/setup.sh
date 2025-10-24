@@ -1,5 +1,6 @@
 #!/bin/bash
 
+echo "> Setup nvim"
 rm ~/.config/nvim/lua/plugins/*
 rm ~/.config/nvim/lua/autocommands/*
 

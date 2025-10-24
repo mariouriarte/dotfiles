@@ -1,5 +1,6 @@
 #!/bin/bash
 
+echo "> Setup bash"
 cp $HOME/.bashrc $HOME/.bashrc.bak
 
 sed -i -z 's/#<!--.*-->//g' $HOME/.zshrc
@@ -39,6 +40,7 @@ alias his="history | grep"
 
 neofetch
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+
 # end-conf -->'
 
 cat <<EOF >>$HOME/.bashrc
