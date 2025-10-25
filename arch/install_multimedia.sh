@@ -10,4 +10,8 @@ sudo pacman -Sy --noconfirm \
     hydrogen \
     deezer \
     deemix \
-    deemix-gui-git
+    deemix-gui-git \
+    audiotube \
+    blanket \
+    haruna \
+    plasmatube
