@@ -1,3 +1,4 @@
+-- Php Intelephense LSP
 -- lua/config/lsp/intelephense.lua (or similar)
 return {
 	{

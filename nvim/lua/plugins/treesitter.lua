@@ -1,3 +1,4 @@
+-- Treesitter analiza y entiende la esturctura del codigo fuente
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",

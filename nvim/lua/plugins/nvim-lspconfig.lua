@@ -1,3 +1,4 @@
+-- Instala lenguajes LSP
 return {
 	-- add pyright to lspconfig
 	{

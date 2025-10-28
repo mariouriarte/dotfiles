@@ -1,3 +1,4 @@
+-- Tema de colores para NVIM
 -- navarasu/onedark
 return {
 	-- Using Lazy
