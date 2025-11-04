@@ -18,7 +18,10 @@ vim.api.nvim_create_autocmd("BufNewFile", {
 			"",
 			"class " .. class_name,
 			"{",
-			"    // Your code...",
+			"    public function __construct()",
+			"    {",
+			"        // code ...",
+			"    }",
 			"}",
 		}
 
@@ -28,7 +31,7 @@ vim.api.nvim_create_autocmd("BufNewFile", {
 		-- Posiciona el cursor dentro de la clase para empezar a escribir
 		local class_line = vim.fn.search("class " .. class_name)
 		if class_line then
-			vim.api.nvim_win_set_cursor(0, { class_line + 2, 5 })
+			vim.api.nvim_win_set_cursor(0, { class_line + 2, 8 })
 		end
 	end,
 })
