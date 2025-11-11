@@ -41,8 +41,6 @@ alias dc="docker compose"
 
 alias his="history | grep"
 
-neofetch
-
 # end-conf -->'
 
 cat <<EOF >>$HOME/.bashrc
