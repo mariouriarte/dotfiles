@@ -15,7 +15,7 @@ dynamic_padding = true
 dimensions.columns = 140
 dimensions.lines = 35
 
-decorations = "None"
+#decorations = "None"
 
 opacity = 0.9
 blur = true
