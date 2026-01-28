@@ -2,4 +2,5 @@
 
 yay -S --noconfirm alacritty \
     fd \
-    ttf-meslo-nerd
+    ttf-meslo-nerd \
+    eza
