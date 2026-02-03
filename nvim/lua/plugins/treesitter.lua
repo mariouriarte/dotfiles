@@ -1,11 +1,26 @@
--- Treesitter analiza y entiende la esturctura del codigo fuente
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
-		build = ":TSUpdate",
-		--config = function()
-		--  require("nvim-treesitter.configs").setup({})
-		--end,
+		opts = function(_, opts)
+			-- Añadimos php y twig a la lista de instalación automática
+			if type(opts.ensure_installed) == "table" then
+				vim.list_extend(opts.ensure_installed, {
+					"php",
+					"php_only", -- Opcional: para archivos PHP sin HTML
+					"python",
+					"typescript",
+					"javascript",
+					"tsx", -- Si usas React
+					"bash",
+					"twig",
+					"html",
+					"css",
+					"marksman",
+					"markdown",
+					"markdown_inline",
+				})
+			end
+		end,
 	},
 }
 
