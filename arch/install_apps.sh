@@ -28,6 +28,7 @@ sudo pacman -Sy --noconfirm \
     podman-desktop \
     obsidian \
     system-config-printer \
-    btop
+    btop \
+    lazygit
 
 sudo systemctl enable sshd.service
