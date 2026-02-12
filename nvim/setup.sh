@@ -6,4 +6,4 @@ rm ~/.config/nvim/lua/autocommands/*
 
 cp nvim/init.lua ~/.config/nvim
 cp -r nvim/lua/ ~/.config/nvim
-cp nvim/config/keymaps.lua ~/.config/nvim/config
+cp nvim/lua/config/keymaps.lua ~/.config/nvim/config
