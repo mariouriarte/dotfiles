@@ -15,7 +15,6 @@ return {
 					"twig",
 					"html",
 					"css",
-					"marksman",
 					"markdown",
 					"markdown_inline",
 				})
