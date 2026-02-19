@@ -10,6 +10,7 @@ sudo pacman -Sy --noconfirm \
     base-devel \
     samba \
     xclip \
+    xsel \
     unzip \
     unrar \
     keepassxc \
