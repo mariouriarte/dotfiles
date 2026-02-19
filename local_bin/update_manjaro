@@ -1,2 +1,3 @@
 #!/bin/bash
-source $HOME/dotfiles/scripts/update_manjaro.sh
+source $HOME/dotfiles/manjaro/update_manjaro.sh
+
