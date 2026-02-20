@@ -19,7 +19,8 @@ return {
               schema = {
                 model = {
                   order = 1,
-                  default = "gemini-3-flash",
+                  -- default = "gemini-2.5-flash",
+                  default = "gemini-3-flash-preview",
                 },
                 thinking_level = {
                   default = "MEDIUM",
@@ -45,6 +46,17 @@ return {
       interactions = {
         chat = {
           adapter = "gemini",
+          roles = {
+            user = "Mario",
+          },
+          keymaps = {
+            completion = {
+              modes = { i = "<C-m>" },
+              index = 1,
+              callback = "keymaps.completion",
+              description = "[Chat] Completion menu",
+            },
+          },
         },
         inline = {
           adapter = "gemini",
@@ -58,10 +70,10 @@ return {
           -- Esto es vital para que NO se vean las etiquetas feas
           -- show_settings = false,
           -- render_headers = true,
-          -- diff = {
-          --   provider = "mini_diff",
-          --   enabled = true,
-          -- },
+          diff = {
+            provider = "mini_diff",
+            enabled = true,
+          },
         },
       },
       opts = {
@@ -73,12 +85,24 @@ return {
       },
     })
 
-    -- Atajos de teclado
+    -- -- Atajos de teclado
+    -- vim.keymap.set({ "n", "v" }, "<leader>aa", "<cmd>CodeCompanionChat Toggle<cr>", { desc = "IA Chat" })
+    -- vim.keymap.set({ "n", "v" }, "<leader>ac", "<cmd>CodeCompanionActions<cr>", { desc = "IA Acciones" })
+    -- vim.keymap.set("v", "ga", "<cmd>CodeCompanionChat Add<cr>", { noremap = true, silent = true })
+    --
+    -- -- Expand 'cc' into 'CodeCompanion' in the command line
+    -- vim.cmd([[cab cc CodeCompanion]])
+    --
+    --  back
+    -- IA Chat (Toggle)
     vim.keymap.set({ "n", "v" }, "<leader>aa", "<cmd>CodeCompanionChat Toggle<cr>", { desc = "IA Chat" })
+    -- Menú de acciones generales (Explicar, optimizar, etc.)
     vim.keymap.set({ "n", "v" }, "<leader>ac", "<cmd>CodeCompanionActions<cr>", { desc = "IA Acciones" })
-    vim.keymap.set("v", "ga", "<cmd>CodeCompanionChat Add<cr>", { noremap = true, silent = true })
 
-    -- Expand 'cc' into 'CodeCompanion' in the command line
+    -- Para añadir código seleccionado al chat sin conflictos
+    vim.keymap.set("v", "<leader>ah", "<cmd>CodeCompanionChat Add<cr>", { desc = "Add to Chat" })
+
+    -- Expandir 'cc' en la línea de comandos
     vim.cmd([[cab cc CodeCompanion]])
   end,
 }
