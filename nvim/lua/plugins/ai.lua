@@ -10,19 +10,24 @@ return {
   config = function()
     require("codecompanion").setup({
       adapters = {
-        gemini = function()
-          return require("codecompanion.adapters").extend("gemini", {
-            env = { api_key = "GEMINI_API_KEY" }, -- Lee la variable de entorno
-            schema = {
-              model = {
-                default = "gemini-2.0-flash",
+        http = {
+          gemini = function()
+            return require("codecompanion.adapters").extend("gemini", {
+              env = {
+                api_key = "GEMINI_API_KEY",
               },
-              thinking_level = {
-                default = "MEDIUM",
+              schema = {
+                model = {
+                  order = 1,
+                  default = "gemini-3-flash",
+                },
+                thinking_level = {
+                  default = "MEDIUM",
+                },
               },
-            },
-          })
-        end,
+            })
+          end,
+        },
         -- 2. Configuración de Gemini (Google Online)
         -- gemini = require("codecompanion.adapters").extend("gemini", {
         --   env = { api_key = "GEMINI_API_KEY" }, -- Lee la variable de entorno
@@ -31,11 +36,11 @@ return {
         --   },
         -- }),
         -- 1. Configuración de Ollama (DeepSeek Local)
-        ollama = require("codecompanion.adapters").extend("ollama", {
-          schema = {
-            model = { default = "deepseek-coder-v2:16b-lite-instruct-q5_K_M" },
-          },
-        }),
+        -- ollama = require("codecompanion.adapters").extend("ollama", {
+        --   schema = {
+        --     model = { default = "deepseek-coder-v2:16b-lite-instruct-q5_K_M" },
+        --   },
+        -- }),
       },
       interactions = {
         chat = {
@@ -51,12 +56,12 @@ return {
       display = {
         chat = {
           -- Esto es vital para que NO se vean las etiquetas feas
-          show_settings = false,
-          render_headers = true,
-          diff = {
-            provider = "mini_diff",
-            enabled = true,
-          },
+          -- show_settings = false,
+          -- render_headers = true,
+          -- diff = {
+          --   provider = "mini_diff",
+          --   enabled = true,
+          -- },
         },
       },
       opts = {
@@ -75,13 +80,5 @@ return {
 
     -- Expand 'cc' into 'CodeCompanion' in the command line
     vim.cmd([[cab cc CodeCompanion]])
-    -- 2. AUTO-COMANDO: Para que los tags <buf> desaparezcan automáticamente
-    -- vim.api.nvim_create_autocmd("FileType", {
-    -- 	pattern = "codecompanion",
-    -- 	callback = function()
-    -- 		vim.opt_local.conceallevel = 2
-    -- 		vim.opt_local.concealcursor = "nc"
-    -- 	end,
-    -- })
   end,
 }

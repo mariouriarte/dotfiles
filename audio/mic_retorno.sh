@@ -2,16 +2,30 @@
 
 set -e
 
-OPTION="$1"
+if ! command -v pactl >/dev/null 2>&1; then
+    echo "Error: 'pactl' is not installed or not in PATH." >&2
+    exit 1
+fi
 
-case "$OPTION" in
+case "$1" in
 'on')
-    pactl load-module module-loopback latency_msec=0
+    if pactl list modules short | grep -q "module-loopback"; then
+        echo "> Microphone loopback is already active."
+    else
+        pactl load-module module-loopback latency_msec=1
+        echo "> Microphone loopback enabled."
+    fi
     ;;
 'off')
-    pactl unload-module module-loopback
+    if pactl list modules short | grep -q "module-loopback"; then
+        pactl unload-module module-loopback
+        echo "> Microphone loopback disabled."
+    else
+        echo "> Microphone loopback is not active."
+    fi
     ;;
 *)
-    echo "> Los argumentos validos son on y off"
+    echo "Usage: $0 {on|off}"
+    exit 1
     ;;
 esac
