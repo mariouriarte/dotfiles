@@ -4,8 +4,8 @@ return {
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-treesitter/nvim-treesitter",
-    "nvim-tree/nvim-web-devicons",
-    "stevearc/dressing.nvim",
+    -- "nvim-tree/nvim-web-devicons",
+    -- "stevearc/dressing.nvim",
   },
   config = function()
     require("codecompanion").setup({
@@ -28,15 +28,10 @@ return {
               },
             })
           end,
+          opts = {
+            show_presets = false,
+          },
         },
-        -- 2. Configuración de Gemini (Google Online)
-        -- gemini = require("codecompanion.adapters").extend("gemini", {
-        --   env = { api_key = "GEMINI_API_KEY" }, -- Lee la variable de entorno
-        --   schema = {
-        --     model = { default = "gemini-3-flash" }, -- Flash es ultra rápido y gratis
-        --   },
-        -- }),
-        -- 1. Configuración de Ollama (DeepSeek Local)
         -- ollama = require("codecompanion.adapters").extend("ollama", {
         --   schema = {
         --     model = { default = "deepseek-coder-v2:16b-lite-instruct-q5_K_M" },
@@ -66,6 +61,17 @@ return {
         },
       },
       display = {
+        action_palette = {
+          width = 95,
+          height = 10,
+          prompt = "Prompt ", -- Prompt used for interactive LLM calls
+          provider = "default", -- Can be "default", "telescope", "fzf_lua", "mini_pick" or "snacks". If not specified, the plugin will autodetect installed providers.
+          opts = {
+            show_preset_actions = true, -- Show the preset actions in the action palette?
+            show_preset_prompts = true, -- Show the preset prompts in the action palette?
+            title = "CodeCompanion actions", -- The title of the action palette
+          },
+        },
         chat = {
           -- Esto es vital para que NO se vean las etiquetas feas
           -- show_settings = false,
@@ -75,13 +81,12 @@ return {
             enabled = true,
           },
         },
+        diff = {
+          provider = "default", -- O "default" / "virt-diff"
+        },
       },
       opts = {
-        -- Esto hace que los nombres de los roles sean más descriptivos
-        -- user_header = "## Usuario",
-        -- assistant_header = "## Asistente (IA)",
-        -- use_default_actions = true,
-        -- use_default_prompts = true,
+        log_level = "DEBUG",
       },
     })
 
@@ -95,14 +100,42 @@ return {
     --
     --  back
     -- IA Chat (Toggle)
-    vim.keymap.set({ "n", "v" }, "<leader>aa", "<cmd>CodeCompanionChat Toggle<cr>", { desc = "IA Chat" })
+    vim.keymap.set(
+      { "n", "v" },
+      "<leader>a",
+      "<cmd>CodeCompanionChat Toggle<cr>",
+      { desc = "IA Chat", noremap = true, silent = true }
+    )
     -- Menú de acciones generales (Explicar, optimizar, etc.)
-    vim.keymap.set({ "n", "v" }, "<leader>ac", "<cmd>CodeCompanionActions<cr>", { desc = "IA Acciones" })
+    vim.keymap.set(
+      { "n", "v" },
+      "<C-a>",
+      "<cmd>CodeCompanionActions<cr>",
+      { desc = "IA Acciones", noremap = true, silent = true }
+    )
 
     -- Para añadir código seleccionado al chat sin conflictos
-    vim.keymap.set("v", "<leader>ah", "<cmd>CodeCompanionChat Add<cr>", { desc = "Add to Chat" })
+    vim.keymap.set(
+      "v",
+      "<leader>ga",
+      "<cmd>CodeCompanionChat Add<cr>",
+      { desc = "Add to Chat", noremap = true, silent = true }
+    )
 
     -- Expandir 'cc' en la línea de comandos
     vim.cmd([[cab cc CodeCompanion]])
+
+    -- ****
+    -- vim.keymap.set({ "n", "v" }, "<C-a>", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
+    -- vim.keymap.set(
+    --   { "n", "v" },
+    --   "<LocalLeader>a",
+    --   "<cmd>CodeCompanionChat Toggle<cr>",
+    --   { noremap = true, silent = true }
+    -- )
+    -- vim.keymap.set("v", "ga", "<cmd>CodeCompanionChat Add<cr>", { noremap = true, silent = true })
+    --
+    -- -- Expand 'cc' into 'CodeCompanion' in the command line
+    -- vim.cmd([[cab cc CodeCompanion]])
   end,
 }
