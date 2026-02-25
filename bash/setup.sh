@@ -33,7 +33,7 @@ alias gps="git push origin"
 alias gpl="git pull origin"
 alias glg="git log --oneline --decorate --all --graph"
 
-alias v="nvim ."
+alias v="nvim"
 
 alias dc="docker compose"
 
