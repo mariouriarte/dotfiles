@@ -1,23 +1,24 @@
 return {
-	{
-		"nvim-treesitter/nvim-treesitter",
-		opts = {
-			ensure_installed = {
-				"php",
-				"python",
-				"bash",
-				"markdown",
-				"markdown_inline",
-				"lua",
-				"vim",
-				"vimdoc", -- Importante para la ayuda de Neovim
-				"yaml",
-			},
-			highlight = {
-				enable = true, -- ESTO es lo que activa los colores en el chat
-			},
-		},
-	},
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = {
+      ensure_installed = {
+        "php",
+        "python",
+        "bash",
+        "markdown",
+        "markdown_inline",
+        "lua",
+        "vim",
+        "vimdoc", -- Importante para la ayuda de Neovim
+        "yaml",
+        "sql",
+      },
+      highlight = {
+        enable = true, -- ESTO es lo que activa los colores en el chat
+      },
+    },
+  },
 }
 
 -- return {
