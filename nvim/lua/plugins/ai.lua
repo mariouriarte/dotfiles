@@ -65,7 +65,7 @@ return {
           width = 95,
           height = 10,
           prompt = "Prompt ", -- Prompt used for interactive LLM calls
-          provider = "default", -- Can be "default", "telescope", "fzf_lua", "mini_pick" or "snacks". If not specified, the plugin will autodetect installed providers.
+          provider = "telescope", -- Can be "default", "telescope", "fzf_lua", "mini_pick" or "snacks". If not specified, the plugin will autodetect installed providers.
           opts = {
             show_preset_actions = true, -- Show the preset actions in the action palette?
             show_preset_prompts = true, -- Show the preset prompts in the action palette?
@@ -82,7 +82,7 @@ return {
           },
         },
         diff = {
-          provider = "default", -- O "default" / "virt-diff"
+          provider = "mini_diff", -- O "default" / "virt-diff"
         },
       },
       opts = {
