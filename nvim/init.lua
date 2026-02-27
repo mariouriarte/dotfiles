@@ -15,15 +15,16 @@ require("autocommands.bash_template")
 require("autocommands.php_template")
 
 -- 1. Configurar opciones de Catppuccin
-require("catppuccin").setup({
-  flavour = "mocha", -- latte, frappe, macchiato, mocha
-  transparent_background = false,
-  integrations = {
-    treesitter = true,
-    native_lsp = { enabled = true },
-    telescope = { enabled = true },
-  },
-})
-
--- 2. Cargar el esquema de colores
-vim.cmd.colorscheme("catppuccin")
+-- require("catppuccin").setup({
+--   flavour = "mocha", -- latte, frappe, macchiato, mocha
+--   transparent_background = false,
+--   integrations = {
+--     treesitter = true,
+--     native_lsp = { enabled = true },
+--     telescope = { enabled = true },
+--   },
+-- })
+--
+-- -- 2. Cargar el esquema de colores
+-- vim.cmd.colorscheme("catppuccin")
+vim.g.lazyvim_colorscheme = "onedark"
