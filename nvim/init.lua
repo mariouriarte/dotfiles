@@ -1,7 +1,7 @@
 -- bootstrap lazy.nvim, LazyVim and your plugins
 require("config.lazy")
 
--- vim.opt.guifont = "Dank Mono" -- Example with a Nerd Font
+vim.opt.guifont = "Dank Mono" -- Example with a Nerd Font
 
 vim.o.tabstop = 4
 vim.o.softtabstop = 4
@@ -27,4 +27,5 @@ require("autocommands.php_template")
 --
 -- -- 2. Cargar el esquema de colores
 -- vim.cmd.colorscheme("catppuccin")
-vim.g.lazyvim_colorscheme = "onedark"
+-- vim.g.lazyvim_colorscheme = "onedark"
+-- vim.cmd.colorscheme("tokyonight-storm")
