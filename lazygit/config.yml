@@ -1,0 +1,24 @@
+gui:
+  # Vista más espaciosa para los nombres de archivos
+  sidePanelWidth: 0.33
+  # Ajuste de texto para que nada se corte
+  # wrapLinesInStagingView: true
+  # Bordes redondeados para un look más moderno
+  border: 'rounded'
+  # Muestra iconos (requiere tener una Nerd Font instalada)
+  # showIcons: true
+  # Resalta la línea seleccionada en todo el panel
+  theme:
+    selectedLineBgColor:
+      - reverse
+git:
+  pagers:
+    - colorArg: always
+      # Delta con vista side-by-side (lado a lado) y números de línea
+      pager: delta --dark --paging=never --line-numbers --syntax-theme="Monokai Extended"
+      # pager: delta --dark --paging=never --side-by-side --line-numbers --syntax-theme=Monokai
+  # Para que al entrar a un archivo ya estés listo para elegir qué líneas subir
+  useHunkModeInStagingView: true
+# Traducción rápida para que no te líes con los comandos
+os:
+  editCommand: 'nvim' # O tu editor favorito (code, vim, nano)
