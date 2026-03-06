@@ -32,7 +32,8 @@ PACKAGES=(
     system-config-printer
     btop
     lazygit
-    openssh # Necesario para sshd.service
+    openssh
+    git-delta
 )
 
 # Actualizar base de datos e instalar paquetes
