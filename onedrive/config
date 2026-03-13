@@ -1,0 +1,2 @@
+# ~/.config/onedrive/config
+skip_dir = ".git|~*|.~*|*.tmp|workspace.json|workspace-mobile.json"

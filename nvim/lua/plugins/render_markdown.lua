@@ -1,18 +1,20 @@
 return {
   {
     "MeanderingProgrammer/render-markdown.nvim",
-    ft = { "markdown", "norg", "rmd", "org", "codecompanion" }, -- file types to enable for
-    config = function()
-      require("render-markdown").setup({}) -- empty setup for defaults
-    end,
-  },
-  {
-    "OXY2DEV/markview.nvim",
-    lazy = false,
+    dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.icons" }, -- Opcional pero recomendado
+    ft = { "markdown", "norg", "rmd", "org", "codecompanion" },
     opts = {
-      preview = {
-        filetypes = { "markdown", "codecompanion" },
-        ignore_buftypes = {},
+      -- Aquí puedes personalizar para que no sea tan "cargado"
+      heading = {
+        enabled = true,
+        sign = false, -- Quita los iconos de la columna lateral si te molestan
+        position = "overlay",
+      },
+      code = {
+        style = "language", -- Solo resalta el lenguaje, evita bordes pesados
+      },
+      checkbox = {
+        enabled = true,
       },
     },
   },
