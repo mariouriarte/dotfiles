@@ -39,9 +39,6 @@ copy-on-select = clipboard
 clipboard-read = allow
 clipboard-write = allow
 
-# --- Atajos de Teclado (Vim-style) ---
-keybind = ctrl+shift+r=reload_config
-
 # Navegación de divisiones (Splits)
 keybind = alt+e=new_split:right
 keybind = alt+o=new_split:down
@@ -49,12 +46,6 @@ keybind = alt+h=goto_split:left
 keybind = alt+l=goto_split:right
 keybind = alt+k=goto_split:top
 keybind = alt+j=goto_split:bottom
-
-# Redimensionar divisiones
-keybind = alt+shift+h=resize_split:left,20
-keybind = alt+shift+l=resize_split:right,20
-keybind = alt+shift+k=resize_split:up,20
-keybind = alt+shift+j=resize_split:bottom,20
 
 # Utilidades
 keybind = f11=toggle_fullscreen
