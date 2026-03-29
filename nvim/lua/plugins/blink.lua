@@ -1,6 +1,7 @@
 -- Plugin de autocompletado
 return {
 	"saghen/blink.cmp",
+	build = "cargo build --release",
 	opts = function(_, opts)
 		-- Desactivar la aparición automática del menú de completado.
 		opts.completion = vim.tbl_deep_extend("force", opts.completion or {}, {
