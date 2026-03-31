@@ -23,15 +23,25 @@ return {
             },
           },
         },
-        intelephense = {
-          settings = {
-            intelephense = {
-              diagnostics = {
-                undefinedTypes = false,
-              },
+        phpactor = {
+          init_options = {
+            ["php_version"] = "7.4",
+            ["code_transform.diagnostic_providers"] = {
+              "unimported_names",
+              "unused_imports",
+              -- "undefined_methods", -- Quitamos esto para evitar avisos de métodos mágicos de Doctrine/Symfony
             },
           },
         },
+        -- intelephense = {
+        --   settings = {
+        --     intelephense = {
+        --       diagnostics = {
+        --         undefinedTypes = false,
+        --       },
+        --     },
+        --   },
+        -- },
       },
     },
   },

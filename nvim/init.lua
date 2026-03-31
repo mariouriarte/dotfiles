@@ -13,5 +13,5 @@ require("autocommands.php_template")
 vim.opt.conceallevel = 2
 vim.opt.concealcursor = "nc"
 
-vim.opt.spell = true
-vim.opt.spelllang = { "es", "en" }
+-- vim.opt.spell = true
+-- vim.opt.spelllang = { "es", "en" }
