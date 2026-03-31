@@ -30,27 +30,4 @@ return {
       },
     },
   },
-  -- {
-  --   "nvim-mini/mini.surround",
-  --   opts = {
-  --     mappings = {
-  --       add = "sa", -- Añadir en modo normal
-  --       delete = "sd", -- Borrar
-  --       replace = "sr", -- Reemplazar
-  --       find = "sf",
-  --       find_left = "sF",
-  --       highlight = "sh",
-  --       update_n_lines = "sn",
-  --       -- Esta es la clave para el modo visual:
-  --       visual = "S",
-  --     },
-  --   },
-  -- },
-  -- Desactivamos Flash en la tecla 'S' para que no choque
-  -- {
-  --   "folke/flash.nvim",
-  --   keys = {
-  --     { "S", mode = { "n", "x", "o" }, false },
-  --   },
-  -- },
 }

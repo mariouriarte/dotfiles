@@ -34,6 +34,7 @@ PACKAGES=(
     lazygit
     openssh
     git-delta
+    ghostty
 )
 
 # Actualizar base de datos e instalar paquetes

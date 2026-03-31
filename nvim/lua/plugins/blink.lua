@@ -1,4 +1,4 @@
--- Plugin de autocompletado
+-- Blink: Motor de autocompletado avanzado para Neovim.
 return {
 	"saghen/blink.cmp",
 	build = "cargo build --release",
