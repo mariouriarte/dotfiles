@@ -59,8 +59,15 @@ return {
           },
         },
         phpactor = {
+          on_attach = function(client, _)
+            -- Deshabilitamos funciones que ya cubre Intelephense para evitar duplicados
+            client.server_capabilities.hoverProvider = false
+            client.server_capabilities.completionProvider = false
+            client.server_capabilities.documentFormattingProvider = false
+            client.server_capabilities.documentRangeFormattingProvider = false
+            client.server_capabilities.diagnosticProvider = nil
+          end,
           init_options = {
-            ["php_version"] = "7.4",
             ["code_transform.diagnostic_providers"] = {
               "unimported_names",
               "unused_imports",
@@ -68,15 +75,15 @@ return {
             },
           },
         },
-        -- intelephense = {
-        --   settings = {
-        --     intelephense = {
-        --       diagnostics = {
-        --         undefinedTypes = false,
-        --       },
-        --     },
-        --   },
-        -- },
+        intelephense = {
+          settings = {
+            intelephense = {
+              diagnostics = {
+                undefinedTypes = false,
+              },
+            },
+          },
+        },
       },
     },
   },
