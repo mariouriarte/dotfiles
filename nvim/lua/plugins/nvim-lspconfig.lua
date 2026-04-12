@@ -6,7 +6,42 @@ return {
     opts = {
       ---@type lspconfig.options
       servers = {
-        pyright = {},
+        -- es la Pyright, analizador de typos
+        basedpyright = {
+          on_attach = function(client, bufnr)
+            if client.server_capabilities.inlayHintProvider then
+              vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+            end
+          end,
+          settings = {
+            basedpyright = {
+              analysis = {
+                typeCheckingMode = "basic",
+                autoImportCompletions = true,
+                useLibraryCodeForTypes = true,
+                autoSearchPaths = true,
+                inlayHints = {
+                  callArgumentNames = true,
+                  functionReturnTypes = true,
+                },
+                diagnosticSeverityOverrides = {
+                  reportUnusedImport = "none",
+                  reportUnusedVariable = "none",
+                  reportMissingImports = "none",
+                  reportUnresolvedImport = "none",
+                  reportDuplicateImport = "none",
+                },
+              },
+            },
+          },
+        },
+        -- Ruff es para verificar python linter y formateador
+        ruff = {
+          on_attach = function(client, _)
+            -- Deshabilitamos el hover de Ruff a favor de Pyright
+            client.server_capabilities.hoverProvider = false
+          end,
+        },
         twiggy_language_server = {},
         html = { filetypes = { "html", "twig" } },
         marksman = {},
