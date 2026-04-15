@@ -68,6 +68,11 @@ return {
             client.server_capabilities.diagnosticProvider = nil
           end,
           init_options = {
+            ["indexer.exclude_patterns"] = {
+              "/vendor/**/Tests/**/*",
+              "/vendor/**/tests/**/*",
+              "/var/cache/**/*",
+            },
             ["code_transform.diagnostic_providers"] = {
               "unimported_names",
               "unused_imports",
@@ -78,6 +83,21 @@ return {
         intelephense = {
           settings = {
             intelephense = {
+              files = {
+                exclude = {
+                  "**/.git/**",
+                  "**/.svn/**",
+                  "**/.hg/**",
+                  "**/CVS/**",
+                  "**/.DS_Store/**",
+                  "**/node_modules/**",
+                  "**/bower_components/**",
+                  "**/vendor/**/{Tests,tests}/**",
+                  "**/.history/**",
+                  "**/vendor/**/vendor/**",
+                  "**/var/cache/**",
+                },
+              },
               diagnostics = {
                 undefinedTypes = false,
               },
