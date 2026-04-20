@@ -30,4 +30,10 @@ size = 11
 bindings = [
   { key = "F11", mods = "None", action = "ToggleMaximized" },
   { key = "F12", action = "ToggleViMode" },
+  { key = "Return", mods = "Shift", chars = "\n" },
 ]
+
+# [[keyboard.bindings]]
+# key = "Return"
+# mods = "Shift"
+# chars = "\u001B\r"
