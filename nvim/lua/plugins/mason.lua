@@ -12,10 +12,11 @@ return {
         "twiggy-language-server",
         "bash-language-server",
         "marksman",
-        -- "intelephense",
+        "intelephense",
         "json-lsp",
         "lua-language-server",
         "ruff",
+        "php-cs-fixer",
       })
     end,
   },

@@ -81,6 +81,11 @@ return {
           },
         },
         intelephense = {
+          on_attach = function(client, _)
+            -- Deshabilitamos el formateo de Intelephense para usar php-cs-fixer
+            client.server_capabilities.documentFormattingProvider = false
+            client.server_capabilities.documentRangeFormattingProvider = false
+          end,
           settings = {
             intelephense = {
               files = {
