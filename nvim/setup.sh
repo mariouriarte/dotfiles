@@ -8,4 +8,4 @@ cp nvim/init.lua ~/.config/nvim
 cp -r nvim/lua/ ~/.config/nvim
 
 cp nvim/lua/config/keymaps.lua ~/.config/nvim/config
-cp nvim/lua/cp_to_dotfiles.sh ~/.config/nvim/
+cp nvim/cp_to_dotfiles.sh ~/.config/nvim/
