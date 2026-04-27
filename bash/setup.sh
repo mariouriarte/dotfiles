@@ -1,27 +1,28 @@
 #!/bin/bash
-
 echo "> Setup bash"
-cp $HOME/.bashrc $HOME/.bashrc.bak
+cp "$HOME/.bashrc" "$HOME/.bashrc.bak"
 
-sed -i -z 's/#<!--.*-->//g' $HOME/.zshrc
-sed -i -z 's/#<!--.*-->//g' $HOME/.bashrc
+# Limpiar config anterior (con patrón más seguro)
+sed -i '/#<!-- custom-conf/,/# end-conf -->/d' "$HOME/.bashrc"
+[ -f "$HOME/.zshrc" ] && sed -i '/#<!-- custom-conf/,/# end-conf -->/d' "$HOME/.zshrc"
 
-multiline_string='#<!-- custom-conf
+# Definir config con heredoc (evita problemas de comillas)
+read -r -d '' multiline_string <<'BLOCK'
+#<!-- custom-conf
+z() {
+  cd "$HOME/$1"
+}
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
-
 export VISUAL=vim
 export EDITOR=vim
-
 alias pfilteroc="ps auwwx"
 alias pfilter="ps auwwx | grep "
 alias start="systemctl start "
 alias stop="systemctl stop "
 alias ena="systemctl enable "
-
 alias ls="eza --icons=always"
 alias clr="clear"
 alias hola_mario="echo Hola Mario"
-
 alias gco="git checkout"
 alias gs="git status"
 alias ga="git add"
@@ -32,28 +33,18 @@ alias gca="git commit -a"
 alias gps="git push origin"
 alias gpl="git pull origin"
 alias glg="git log --oneline --decorate --all --graph"
-
 alias v="nvim"
-
 alias dc="docker compose"
-
 alias his="history | grep"
+# end-conf -->
+BLOCK
 
-# end-conf -->'
+echo "$multiline_string" >>"$HOME/.bashrc"
 
-cat <<EOF >>$HOME/.bashrc
-$multiline_string
-EOF
-
-if [ -e "${HOME}/.zshrc" ]; then
-    cat <<EOF >>$HOME/.zshrc
-$multiline_string
-EOF
-
+if [ -f "$HOME/.zshrc" ]; then
+    echo "$multiline_string" >>"$HOME/.zshrc"
 fi
 
-# quitar saltos de linea
-sed -i -e ':a' -e 'N' -e '$!ba' -e 's/\n\n/\n/g' $HOME/.zshrc
-sed -i -e ':a' -e 'N' -e '$!ba' -e 's/\n\n/\n/g' $HOME/.bashrc
-
-#[[ ! -f ~/.zshrc ]] || source ~/.zshrc
+# Quitar líneas vacías duplicadas (más simple)
+sed -i '/^$/N;/^\n$/d' "$HOME/.bashrc"
+[ -f "$HOME/.zshrc" ] && sed -i '/^$/N;/^\n$/d' "$HOME/.zshrc"
