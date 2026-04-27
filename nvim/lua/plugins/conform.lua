@@ -16,9 +16,9 @@ return {
         prepend_args = { "--rules=@PSR12" },
       },
     },
-    format_on_save = {
-      timeout_ms = 1500,
-      lsp_format = "fallback",
-    },
+    -- format_on_save = {
+    --   timeout_ms = 1500,
+    --   lsp_format = "fallback",
+    -- },
   },
 }

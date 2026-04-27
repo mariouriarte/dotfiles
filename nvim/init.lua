@@ -29,5 +29,13 @@ vim.api.nvim_create_user_command("LspForceRestart", function()
   end, 500)
 end, { desc = "Force restart all active LSP clients" })
 
--- vim.opt.spell = true
--- vim.opt.spelllang = { "es", "en" }
+vim.opt.spell = false
+vim.opt.spelllang = { "es", "en" }
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "markdown", "text", "gitcommit", "codecompanion" },
+  callback = function()
+    vim.opt_local.spell = false
+    vim.opt_local.list = false
+  end,
+})
