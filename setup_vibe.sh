@@ -30,6 +30,7 @@ SCRIPTS=(
     "./alacritty/setup.sh"
     "./bash/setup.sh"
     "./nvim/setup.sh"
+    "./arch/install_tmux.sh"
 )
 
 for script in "${SCRIPTS[@]}"; do
