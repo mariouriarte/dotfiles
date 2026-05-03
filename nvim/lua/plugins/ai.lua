@@ -102,14 +102,14 @@ return {
 		-- IA Chat (Toggle)
 		vim.keymap.set(
 			{ "n", "v" },
-			"<leader>ta",
+			"<leader>a",
 			"<cmd>CodeCompanionChat Toggle<cr>",
 			{ desc = "IA Chat", noremap = true, silent = true }
 		)
 		-- Menú de acciones generales (Explicar, optimizar, etc.)
 		vim.keymap.set(
 			{ "n", "v" },
-			"<leader-tc>",
+			"<leader>tc",
 			"<cmd>CodeCompanionActions<cr>",
 			{ desc = "IA Acciones", noremap = true, silent = true }
 		)

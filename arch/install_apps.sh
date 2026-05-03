@@ -35,6 +35,9 @@ PACKAGES=(
     openssh
     git-delta
     ghostty
+    tmux
+    atuin
+    zoxide
 )
 
 # Actualizar base de datos e instalar paquetes

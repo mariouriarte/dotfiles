@@ -4,8 +4,8 @@ background-opacity = 0.95
 background-blur-radius = 0
 window-decoration = true
 window-padding-x = 10
-window-padding-y = 10
-window-padding-balance = true
+#window-padding-y = 10
+#window-padding-balance = true
 window-theme = dark
 
 window-height = 35
