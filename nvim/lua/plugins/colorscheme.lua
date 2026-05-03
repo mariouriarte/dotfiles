@@ -1,13 +1,25 @@
 return {
-  -- Instalar tokyodark.nvim
+  -- Instalar catppuccin
   {
-    "tiagovla/tokyodark.nvim",
+    "catppuccin/nvim",
     opts = {
-      -- Puedes añadir opciones aquí, ej: transparent_background = true
+      flavour = "mocha",
+      transparent_background = true,
+      custom_highlights = function()
+        return {
+          NormalFloat = { bg = "NONE" },
+          FloatBorder = { bg = "NONE" },
+          FloatTitle = { bg = "NONE" },
+          TelescopeNormal = { bg = "NONE" },
+          TelescopeBorder = { bg = "NONE" },
+          NvimTreeNormal = { bg = "NONE" },
+          NvimTreeNormalNC = { bg = "NONE" },
+        }
+      end,
     },
     config = function(_, opts)
-      require("tokyodark").setup(opts) -- El setup es opcional pero recomendado
-      vim.cmd([[colorscheme tokyodark]])
+      require("catppuccin").setup(opts)
+      vim.cmd([[colorscheme catppuccin]])
     end,
   },
 
@@ -15,7 +27,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "tokyodark",
+      colorscheme = "catppuccin",
     },
   },
 }
