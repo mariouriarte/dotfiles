@@ -44,14 +44,14 @@ return {
 					roles = {
 						user = "Mario",
 					},
-					keymaps = {
-						completion = {
-							modes = { i = "<C-m>" },
-							index = 1,
-							callback = "keymaps.completion",
-							description = "[Chat] Completion menu",
-						},
-					},
+					-- keymaps = {
+					-- 	completion = {
+					-- 		modes = { i = "<C-m>" },
+					-- 		index = 1,
+					-- 		callback = "keymaps.completion",
+					-- 		description = "[Chat] Completion menu",
+					-- 	},
+					-- },
 				},
 				inline = {
 					adapter = "gemini",

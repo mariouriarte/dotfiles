@@ -3,18 +3,20 @@
 -- Add any additional keymaps here
 
 -- Comentar linea o seleccion con control + shift + /
-vim.keymap.set("n", "<C-S-/>", "gcc", { remap = true })
-vim.keymap.set("v", "<C-S-/>", "gc", { remap = true })
+--vim.keymap.set("n", "<M-/>", "gcc", { remap = true })
+--vim.keymap.set("v", "<M-/>", "gc", { remap = true })
+vim.keymap.set("n", "<M-/>", "gcc", { remap = true, desc = "Comentar línea" })
+vim.keymap.set("v", "<M-/>", "gc", { remap = true, desc = "Comentar selección" })
 
 -- Cerrar buffer actual con Alt + w
 -- Usamos Snacks.bufdelete() porque es el estándar de LazyVim para no romper el layout
 vim.keymap.set("n", "<M-w>", function()
-  Snacks.bufdelete()
+	Snacks.bufdelete()
 end, { desc = "Cerrar Buffer (Alt+w)" })
 
 -- Terminal en split vertical (derecha)
 vim.keymap.set("n", "<leader>tv", function()
-  Snacks.terminal(nil, { win = { position = "right", width = 0.4 } })
+	Snacks.terminal(nil, { win = { position = "right", width = 0.4 } })
 end, { desc = "Terminal Vertical (Derecha)" })
 
 vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { desc = "Enter Normal Mode" })
