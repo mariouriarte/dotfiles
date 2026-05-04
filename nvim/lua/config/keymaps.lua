@@ -14,9 +14,4 @@ vim.keymap.set("n", "<M-w>", function()
 	Snacks.bufdelete()
 end, { desc = "Cerrar Buffer (Alt+w)" })
 
--- Terminal en split vertical (derecha)
-vim.keymap.set("n", "<leader>tv", function()
-	Snacks.terminal(nil, { win = { position = "right", width = 0.4 } })
-end, { desc = "Terminal Vertical (Derecha)" })
-
 vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { desc = "Enter Normal Mode" })
