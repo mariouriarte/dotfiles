@@ -1,6 +1,6 @@
 # --- Apariencia ---
 theme = "Ayu"
-background-opacity = 0.98
+background-opacity = 0.95
 background-blur-radius = 0
 window-decoration = true
 window-padding-x = 10

@@ -102,7 +102,7 @@ return {
 		-- IA Chat (Toggle)
 		vim.keymap.set(
 			{ "n", "v" },
-			"<leader>a",
+			"<leader>ta",
 			"<cmd>CodeCompanionChat Toggle<cr>",
 			{ desc = "IA Chat", noremap = true, silent = true }
 		)
