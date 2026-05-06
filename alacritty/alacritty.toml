@@ -20,7 +20,7 @@ dimensions.lines = 35
 
 #decorations = "None"
 
-opacity = 0.95
+opacity = 0.98
 #blur = true
 
 option_as_alt = "Both"
