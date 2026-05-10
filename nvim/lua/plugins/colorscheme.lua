@@ -4,18 +4,7 @@ return {
     "catppuccin/nvim",
     opts = {
       flavour = "mocha",
-      transparent_background = true,
-      custom_highlights = function()
-        return {
-          NormalFloat = { bg = "NONE" },
-          FloatBorder = { bg = "NONE" },
-          FloatTitle = { bg = "NONE" },
-          TelescopeNormal = { bg = "NONE" },
-          TelescopeBorder = { bg = "NONE" },
-          NvimTreeNormal = { bg = "NONE" },
-          NvimTreeNormalNC = { bg = "NONE" },
-        }
-      end,
+      transparent_background = false,
     },
     config = function(_, opts)
       require("catppuccin").setup(opts)
