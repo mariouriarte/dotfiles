@@ -9,9 +9,13 @@ sed -i '/#<!-- custom-conf/,/# end-conf -->/d' "$HOME/.bashrc"
 # Definir config con heredoc (evita problemas de comillas)
 read -r -d '' multiline_string <<'BLOCK'
 #<!-- custom-conf
-z() {
-  cd "$HOME/$1"
-}
+if command -v zoxide >/dev/null 2>&1; then
+  if [ -n "$BASH_VERSION" ]; then
+    eval "$(zoxide init bash)"
+  elif [ -n "$ZSH_VERSION" ]; then
+    eval "$(zoxide init zsh)"
+  fi
+fi
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 export VISUAL=vim
 export EDITOR=vim
