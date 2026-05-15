@@ -1,14 +1,15 @@
 return {
-  -- Instalar catppuccin
+  -- Instalar gruvbox-material
   {
-    "catppuccin/nvim",
-    opts = {
-      flavour = "mocha",
-      transparent_background = false,
-    },
-    config = function(_, opts)
-      require("catppuccin").setup(opts)
-      vim.cmd([[colorscheme catppuccin]])
+    "sainnhe/gruvbox-material",
+    priority = 1000,
+    config = function()
+      vim.o.background = "dark"
+      vim.g.gruvbox_material_foreground = "original"
+      vim.g.gruvbox_material_background = "hard"
+      vim.g.gruvbox_material_enable_italic = 0
+      vim.g.gruvbox_material_better_performance = 1
+      vim.cmd.colorscheme("gruvbox-material")
     end,
   },
 
@@ -16,7 +17,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "catppuccin",
+      colorscheme = "gruvbox-material",
     },
   },
 }
