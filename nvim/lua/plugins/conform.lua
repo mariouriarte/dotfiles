@@ -11,9 +11,10 @@ return {
     },
     formatters = {
       php_cs_fixer = {
-        -- php-cs-fixer no tiene un flag de longitud de línea directo,
-        -- pero PSR12 aplica el estándar recomendado de 120 columnas.
-        prepend_args = { "--rules=@PSR12" },
+        -- PHP 5.6 no soporta visibilidad en constantes de clase.
+        prepend_args = {
+          '--rules={"@PSR12": true, "modifier_keywords": {"elements": ["method", "property"]}}',
+        },
       },
     },
     -- format_on_save = {
