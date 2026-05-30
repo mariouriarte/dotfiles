@@ -13,23 +13,24 @@ return {
 			return {
 				options = {
 					always_show_tabline = true,
-					theme = "sonokai", -- Usamos explícitamente el tema Sonokai
-					component_separators = { left = "", right = "" },
-					section_separators = { left = "", right = "" },
+					section_separators = { left = "", right = "" },
+					component_separators = { left = "╱", right = "╱" },
+					theme = "sonokai", -- O el tema que estés usando
 				},
 				tabline = {
 					lualine_a = {
 						{
 							"buffers",
 							mode = 2,
+							max_length = vim.o.columns,
 							padding = 1,
-							component_separators = { left = "", right = "" },
-							section_separators = { left = "", right = "" },
+							component_separators = { left = "│", right = "│" },
+							section_separators = { left = "", right = "" },
 							buffers_color = {
 								active = { fg = "#2c2e34", bg = "#fc5d7c", gui = "bold" },
 								inactive = { fg = "#c7c7c7", bg = "#3b3e48" },
 							},
-							symbols = { modified = " +", alternate_file = "" },
+							symbols = { modified = " ●", alternate_file = "" },
 						},
 					},
 					lualine_b = {},
