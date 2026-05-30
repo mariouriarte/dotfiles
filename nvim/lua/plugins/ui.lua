@@ -17,6 +17,17 @@ return {
 					component_separators = { left = "╱", right = "╱" },
 					theme = "sonokai", -- O el tema que estés usando
 				},
+				sections = {
+					lualine_a = { "mode" },
+					lualine_b = {},
+					lualine_c = {
+						"filename",
+						{ "navic", color_correction = "dynamic" },
+					},
+					lualine_x = { "encoding", "fileformat", "filetype" },
+					lualine_y = { "progress" },
+					lualine_z = { "location" },
+				},
 				tabline = {
 					lualine_a = {
 						{
@@ -37,7 +48,7 @@ return {
 					lualine_c = {},
 					lualine_x = {},
 					lualine_y = {},
-					lualine_z = {},
+					lualine_z = { "branch" },
 				},
 			}
 		end,
