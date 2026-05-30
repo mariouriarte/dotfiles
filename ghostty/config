@@ -35,7 +35,7 @@ unfocused-split-opacity = 0.8
 # --- Integración de Shell ---
 term = xterm-256color
 shell-integration = detect
-command = /bin/bash -lc "tmux new-session -A -s main"
+command = /bin/bash -lc 'tmux new-session -A -s "$USER"'
 copy-on-select = clipboard
 clipboard-read = allow
 clipboard-write = allow
