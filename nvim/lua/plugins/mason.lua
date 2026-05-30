@@ -15,6 +15,7 @@ return {
         "intelephense",
         "json-lsp",
         "lua-language-server",
+        "yaml-language-server",
         "ruff",
         "php-cs-fixer",
       })
