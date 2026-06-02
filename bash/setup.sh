@@ -40,6 +40,19 @@ alias glg="git log --oneline --decorate --all --graph"
 alias v="nvim"
 alias dc="docker compose"
 alias his="history | grep"
+tms() {
+  if [ -z "$1" ]; then
+    echo "Uso: tms nombre-sesion"
+    return 1
+  fi
+
+  if [ -n "$TMUX" ]; then
+    tmux has-session -t "$1" 2>/dev/null || tmux new-session -d -s "$1"
+    tmux switch-client -t "$1"
+  else
+    tmux new-session -As "$1"
+  fi
+}
 # end-conf -->
 BLOCK
 
