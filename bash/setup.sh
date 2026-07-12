@@ -19,6 +19,7 @@ fi
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 export VISUAL=vim
 export EDITOR=vim
+export PATH="$HOME/.local/bin:$PATH"
 alias pfilteroc="ps auwwx"
 alias pfilter="ps auwwx | grep "
 alias start="systemctl start "
