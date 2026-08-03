@@ -13,8 +13,11 @@ cp tmux/tmux.conf "$HOME/.tmux.conf"
 
 if command -v tmux >/dev/null 2>&1; then
     if [ -x "$HOME/.tmux/plugins/tpm/bin/install_plugins" ]; then
+        tmux start-server \; source-file "$HOME/.tmux.conf" \; set-environment -g TMUX_PLUGIN_MANAGER_PATH "$HOME/.tmux/plugins/"
         echo "Instalando plugins de tmux (TPM)..."
-        "$HOME/.tmux/plugins/tpm/bin/install_plugins"
+        if ! "$HOME/.tmux/plugins/tpm/bin/install_plugins"; then
+            echo "No se pudieron instalar los plugins de TPM"
+        fi
     else
         echo "No se encontro install_plugins de TPM"
     fi
