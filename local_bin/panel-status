@@ -3,7 +3,7 @@
 STATE="${XDG_RUNTIME_DIR:-/tmp}/panel-status-$UID.state"
 
 # ─── CPU usage ───────────────────────────────────────────────
-read -r _ user nice system idle iowait irq softirq steal _ < /proc/stat
+read -r _ user nice system idle iowait irq softirq steal _ </proc/stat
 
 cpu_idle=$((idle + iowait))
 cpu_total=$((user + nice + system + idle + iowait + irq + softirq + steal))
@@ -26,14 +26,14 @@ prev_ms=$now_ms
 prev_iface=$iface
 
 if [[ -r "$STATE" ]]; then
-    read -r prev_total prev_idle prev_rx prev_ms prev_iface < "$STATE"
+    read -r prev_total prev_idle prev_rx prev_ms prev_iface <"$STATE"
 fi
 
 # ─── CPU % ───────────────────────────────────────────────────
 dt=$((cpu_total - prev_total))
 di=$((cpu_idle - prev_idle))
 
-if (( dt > 0 )); then
+if ((dt > 0)); then
     cpu_pct=$(awk -v dt="$dt" -v di="$di" \
         'BEGIN { printf "%.0f", 100*(dt-di)/dt }')
 else
@@ -44,17 +44,17 @@ fi
 elapsed=$((now_ms - prev_ms))
 
 if [[ "$iface" == "$prev_iface" && $elapsed -gt 0 && $rx -ge $prev_rx ]]; then
-    net_bps=$(( (rx - prev_rx) * 1000 / elapsed ))
+    net_bps=$(((rx - prev_rx) * 1000 / elapsed))
 else
     net_bps=0
 fi
 
 printf '%s %s %s %s %s\n' \
-    "$cpu_total" "$cpu_idle" "$rx" "$now_ms" "$iface" > "$STATE"
+    "$cpu_total" "$cpu_idle" "$rx" "$now_ms" "$iface" >"$STATE"
 
 # Siempre mostrar red en megabits por segundo
 net=$(awk -v b="$net_bps" \
-    'BEGIN { printf "%.2f", (b * 8) / 1000000 }')
+    'BEGIN { printf "%.2f", b / 1000000 }')
 
 # ─── RAM ─────────────────────────────────────────────────────
 mem_total=$(awk '/^MemTotal:/ {print $2}' /proc/meminfo)
@@ -72,12 +72,12 @@ for h in /sys/class/hwmon/hwmon*; do
     name=$(<"$h/name")
 
     case "$name" in
-        k10temp)
-            cpu_hwmon="$h"
-            ;;
-        corsairpsu*)
-            psu_hwmon="$h"
-            ;;
+    k10temp)
+        cpu_hwmon="$h"
+        ;;
+    corsairpsu*)
+        psu_hwmon="$h"
+        ;;
     esac
 done
 
@@ -95,7 +95,7 @@ gpu_data=$(nvidia-smi \
     --format=csv,noheader,nounits 2>/dev/null | head -n1)
 
 if [[ -n "$gpu_data" ]]; then
-    IFS=',' read -r gpu_pct gpu_temp <<< "$gpu_data"
+    IFS=',' read -r gpu_pct gpu_temp <<<"$gpu_data"
     gpu_pct=${gpu_pct// /}
     gpu_temp=${gpu_temp// /}
 else
@@ -131,9 +131,9 @@ pad() {
     local n=$((width - len))
     local out=""
 
-    (( n < 0 )) && n=0
+    ((n < 0)) && n=0
 
-    for ((i=0; i<n; i++)); do
+    for ((i = 0; i < n; i++)); do
         out+="$PAD"
     done
 
@@ -162,18 +162,17 @@ psu_w_f=$(pad 4 "$psu_w")
 psu_t_f=$(pad 3 "$psu_temp")
 
 # ─── Colores ─────────────────────────────────────────────────
-BLUE=$'\e[38;5;12m'      # NET
-CYAN=$'\e[38;5;27m'      # RAM
-ORANGE=$'\e[38;5;202m'   # CPU
-GREEN=$'\e[38;5;154m'    # GPU
-PINK=$'\e[38;5;198m'     # PSU
+BLUE=$'\e[38;5;12m'    # NET
+CYAN=$'\e[38;5;27m'    # RAM
+ORANGE=$'\e[38;5;202m' # CPU
+GREEN=$'\e[38;5;154m'  # GPU
+PINK=$'\e[38;5;198m'   # PSU
 RESET=$'\e[0m'
 
 # ─── Output ──────────────────────────────────────────────────
-printf '%b┃%b NET %s Mb/s  %b┃%b RAM %s%%  %b┃%b CPU %s%% %s°C  %b┃%b GPU %s%% %s°C  %b┃%b PSU %sV %sW %s°C\n' \
+printf '%b┃%b NET %s MB/s  %b┃%b RAM %s%%  %b┃%b CPU %s%% %s°C  %b┃%b GPU %s%% %s°C  %b┃%b PSU %sV %sW %s°C\n' \
     "$BLUE" "$RESET" "$net_f" \
     "$CYAN" "$RESET" "$ram_f" \
     "$ORANGE" "$RESET" "$cpu_f" "$cpu_t_f" \
     "$GREEN" "$RESET" "$gpu_f" "$gpu_t_f" \
     "$PINK" "$RESET" "$psu_v_f" "$psu_w_f" "$psu_t_f"
-
