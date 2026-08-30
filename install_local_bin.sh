@@ -1,5 +1,4 @@
 #!/bin/bash
-
 set -e
 
 echo '> Starting local bin installation...'
@@ -22,10 +21,11 @@ if [ -d "$DIR_DOTFILES_BIN" ]; then
             filename=$(basename "$file")
 
             # Ensure file is executable
-            chmod 775 "$file"
+            chmod 755 "$file"
 
-            # Create symbolic link
-            ln -sf "$file" "$DIR_LOCAL_BIN/$filename"
+            # Create/update symbolic link
+            ln -sfn "$file" "$DIR_LOCAL_BIN/$filename"
+
             echo "Linked: $filename"
         fi
     done

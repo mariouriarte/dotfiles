@@ -1,0 +1,179 @@
+#!/usr/bin/env bash
+
+STATE="${XDG_RUNTIME_DIR:-/tmp}/panel-status-$UID.state"
+
+# ─── CPU usage ───────────────────────────────────────────────
+read -r _ user nice system idle iowait irq softirq steal _ < /proc/stat
+
+cpu_idle=$((idle + iowait))
+cpu_total=$((user + nice + system + idle + iowait + irq + softirq + steal))
+
+# ─── Network ─────────────────────────────────────────────────
+iface=$(ip route show default 2>/dev/null | awk 'NR==1 {print $5}')
+
+if [[ -n "$iface" && -r "/sys/class/net/$iface/statistics/rx_bytes" ]]; then
+    rx=$(<"/sys/class/net/$iface/statistics/rx_bytes")
+else
+    rx=0
+fi
+
+now_ms=$(date +%s%3N)
+
+prev_total=$cpu_total
+prev_idle=$cpu_idle
+prev_rx=$rx
+prev_ms=$now_ms
+prev_iface=$iface
+
+if [[ -r "$STATE" ]]; then
+    read -r prev_total prev_idle prev_rx prev_ms prev_iface < "$STATE"
+fi
+
+# ─── CPU % ───────────────────────────────────────────────────
+dt=$((cpu_total - prev_total))
+di=$((cpu_idle - prev_idle))
+
+if (( dt > 0 )); then
+    cpu_pct=$(awk -v dt="$dt" -v di="$di" \
+        'BEGIN { printf "%.0f", 100*(dt-di)/dt }')
+else
+    cpu_pct=0
+fi
+
+# ─── Download rate ───────────────────────────────────────────
+elapsed=$((now_ms - prev_ms))
+
+if [[ "$iface" == "$prev_iface" && $elapsed -gt 0 && $rx -ge $prev_rx ]]; then
+    net_bps=$(( (rx - prev_rx) * 1000 / elapsed ))
+else
+    net_bps=0
+fi
+
+printf '%s %s %s %s %s\n' \
+    "$cpu_total" "$cpu_idle" "$rx" "$now_ms" "$iface" > "$STATE"
+
+# Siempre mostrar red en megabits por segundo
+net=$(awk -v b="$net_bps" \
+    'BEGIN { printf "%.2f", (b * 8) / 1000000 }')
+
+# ─── RAM ─────────────────────────────────────────────────────
+mem_total=$(awk '/^MemTotal:/ {print $2}' /proc/meminfo)
+mem_available=$(awk '/^MemAvailable:/ {print $2}' /proc/meminfo)
+
+ram_pct=$(awk -v total="$mem_total" -v avail="$mem_available" \
+    'BEGIN { printf "%.0f", 100*(total-avail)/total }')
+
+# ─── Find hwmon devices ──────────────────────────────────────
+cpu_hwmon=""
+psu_hwmon=""
+
+for h in /sys/class/hwmon/hwmon*; do
+    [[ -r "$h/name" ]] || continue
+    name=$(<"$h/name")
+
+    case "$name" in
+        k10temp)
+            cpu_hwmon="$h"
+            ;;
+        corsairpsu*)
+            psu_hwmon="$h"
+            ;;
+    esac
+done
+
+# ─── CPU temperature ─────────────────────────────────────────
+if [[ -n "$cpu_hwmon" && -r "$cpu_hwmon/temp1_input" ]]; then
+    cpu_temp=$(awk -v t="$(cat "$cpu_hwmon/temp1_input")" \
+        'BEGIN { printf "%.0f", t/1000 }')
+else
+    cpu_temp="?"
+fi
+
+# ─── NVIDIA GPU ──────────────────────────────────────────────
+gpu_data=$(nvidia-smi \
+    --query-gpu=utilization.gpu,temperature.gpu \
+    --format=csv,noheader,nounits 2>/dev/null | head -n1)
+
+if [[ -n "$gpu_data" ]]; then
+    IFS=',' read -r gpu_pct gpu_temp <<< "$gpu_data"
+    gpu_pct=${gpu_pct// /}
+    gpu_temp=${gpu_temp// /}
+else
+    gpu_pct="?"
+    gpu_temp="?"
+fi
+
+# ─── Corsair PSU ─────────────────────────────────────────────
+if [[ -n "$psu_hwmon" ]]; then
+    psu_v=$(awk -v x="$(cat "$psu_hwmon/in1_input")" \
+        'BEGIN { printf "%.2f", x/1000 }')
+
+    psu_w=$(awk -v x="$(cat "$psu_hwmon/power1_input")" \
+        'BEGIN { printf "%.0f", x/1000000 }')
+
+    psu_temp=$(awk -v x="$(cat "$psu_hwmon/temp1_input")" \
+        'BEGIN { printf "%.0f", x/1000 }')
+else
+    psu_v="?"
+    psu_w="?"
+    psu_temp="?"
+fi
+
+# ─── Fixed-width fields ──────────────────────────────────────
+# Carácter invisible real, no whitespace.
+# Evita que Plasma/Qt lo colapse o cambie su ancho.
+PAD=$'\u2800'
+
+pad() {
+    local width="$1"
+    local value="$2"
+    local len=${#value}
+    local n=$((width - len))
+    local out=""
+
+    (( n < 0 )) && n=0
+
+    for ((i=0; i<n; i++)); do
+        out+="$PAD"
+    done
+
+    printf '%s%s' "$out" "$value"
+}
+
+# Anchos reservados
+#
+# NET:      0.00 → 1000.00 Mb/s
+# RAM:         0 → 100 %
+# CPU/GPU:     0 → 100 %
+# Temp:        0 → 999 °C
+# PSU W:       0 → 1200 W
+
+net_f=$(pad 7 "$net")
+ram_f=$(pad 3 "$ram_pct")
+
+cpu_f=$(pad 3 "$cpu_pct")
+cpu_t_f=$(pad 3 "$cpu_temp")
+
+gpu_f=$(pad 3 "$gpu_pct")
+gpu_t_f=$(pad 3 "$gpu_temp")
+
+psu_v_f=$(pad 5 "$psu_v")
+psu_w_f=$(pad 4 "$psu_w")
+psu_t_f=$(pad 3 "$psu_temp")
+
+# ─── Colores ─────────────────────────────────────────────────
+BLUE=$'\e[38;5;12m'      # NET
+CYAN=$'\e[38;5;27m'      # RAM
+ORANGE=$'\e[38;5;202m'   # CPU
+GREEN=$'\e[38;5;154m'    # GPU
+PINK=$'\e[38;5;198m'     # PSU
+RESET=$'\e[0m'
+
+# ─── Output ──────────────────────────────────────────────────
+printf '%b┃%b NET %s Mb/s  %b┃%b RAM %s%%  %b┃%b CPU %s%% %s°C  %b┃%b GPU %s%% %s°C  %b┃%b PSU %sV %sW %s°C\n' \
+    "$BLUE" "$RESET" "$net_f" \
+    "$CYAN" "$RESET" "$ram_f" \
+    "$ORANGE" "$RESET" "$cpu_f" "$cpu_t_f" \
+    "$GREEN" "$RESET" "$gpu_f" "$gpu_t_f" \
+    "$PINK" "$RESET" "$psu_v_f" "$psu_w_f" "$psu_t_f"
+

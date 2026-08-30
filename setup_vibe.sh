@@ -25,6 +25,19 @@ fi
 
 echo "Setup Vibe Mario..."
 
+# ─── Local bin scripts ───────────────────────────────────────
+if [ -f "./install_local_bin.sh" ]; then
+    log "INFO" "Running install_local_bin.sh"
+
+    if bash ./install_local_bin.sh >>"$LOG_FILE" 2>&1; then
+        log "INFO" "Local bin installation completed successfully."
+    else
+        log "ERROR" "Local bin installation failed."
+    fi
+else
+    log "WARN" "install_local_bin.sh not found, skipping."
+fi
+
 # List of scripts to source
 SCRIPTS=(
     "./alacritty/setup.sh"
