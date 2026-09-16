@@ -7,7 +7,7 @@ DOTFILES_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 
 install_prerequisites() {
     if command -v pacman >/dev/null 2>&1; then
-        echo "Installing Gentle AI prerequisites for Arch/Manjaro..."
+        echo "Installing Gentle AI prerequisites for Arch Linux..."
         sudo pacman -S --needed --noconfirm git curl nodejs npm go
     else
         echo "pacman not found; skipping OS prerequisite installation."

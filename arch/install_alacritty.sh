@@ -1,6 +1,5 @@
 #!/bin/bash
 
-yay -S --noconfirm alacritty \
-    fd \
-    ttf-meslo-nerd \
-    eza
+set -euo pipefail
+
+sudo pacman -S --needed --noconfirm alacritty fd eza

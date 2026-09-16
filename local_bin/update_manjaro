@@ -1,3 +1,0 @@
-#!/bin/bash
-source $HOME/dotfiles/manjaro/update_manjaro.sh
-

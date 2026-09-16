@@ -2,7 +2,7 @@
 
 ## Scope and Layout
 - This repo is a personal dotfiles collection, not an app/library project; most changes are shell scripts plus Neovim config under `nvim/`.
-- Main areas: `nvim/` (LazyVim-based config), `bash/`, `alacritty/`, `ghostty/`, `git/`, and OS-specific installers in `arch/`, `manjaro/`, `ubuntu/`.
+- Main areas: `nvim/` (LazyVim-based config), `bash/`, `alacritty/`, `ghostty/`, `git/`, and Arch Linux installers in `arch/`.
 
 ## Source of Truth Commands
 - Run scripts from repo root (`/home/mario/dotfiles`); many scripts use relative paths and will fail from other directories.
@@ -20,6 +20,6 @@
 - `bash/setup.sh` edits both `~/.bashrc` and optionally `~/.zshrc` in-place (removes/rewrites the block between `#<!-- custom-conf` and `# end-conf -->`).
 
 ## Verified Repo Quirks
-- `Makefile` targets are stale right now: they call `scripts/install_manjaro_apps.sh` and `scripts/install_p10k.sh`, but only `scripts/install_config_files.sh` exists.
+- Arch Linux is the only supported OS bootstrap target.
 - `README.md` is minimal and not an operational guide; trust scripts as the executable source of truth.
 - No CI, test, lint, formatter, or typecheck config is present at repo root; validate changes by running the specific shell script you touched.

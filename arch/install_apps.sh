@@ -1,27 +1,18 @@
 #!/bin/bash
 
-# Salir si ocurre un error
-set -e
+set -euo pipefail
 
 echo "Installing system applications..."
 
-# Array de paquetes para facilitar el mantenimiento
 PACKAGES=(
-    base-devel
     vim
     samba
     xclip
     xsel
-    unzip
-    unrar
     keepassxc
     thunderbird
     vivaldi
-    kate
-    kwrite
     apache
-    wget
-    git
     gitg
     filezilla
     firefox
@@ -32,19 +23,15 @@ PACKAGES=(
     system-config-printer
     btop
     lazygit
-    openssh
     git-delta
     ghostty
+    ttf-jetbrains-mono-nerd
+    ttf-meslo-nerd
     tmux
     atuin
     zoxide
 )
 
-# Actualizar base de datos e instalar paquetes
 sudo pacman -S --needed --noconfirm "${PACKAGES[@]}"
-
-# Configuración de servicios
-echo "Enabling services..."
-sudo systemctl enable --now sshd.service
 
 echo "Installation complete."

@@ -1,8 +1,8 @@
 #!/bin/bash
 
-sudo pacman -Sy --noconfirm docker \
-    docker-compose
+set -euo pipefail
 
-sudo systemctl enable docker.service
-sudo systemctl start docker.service
-sudo usermod -aG docker $USER
+sudo pacman -S --needed --noconfirm docker docker-compose
+
+sudo systemctl enable --now docker.service
+sudo usermod -aG docker "$USER"

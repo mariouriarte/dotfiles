@@ -8,7 +8,7 @@ Personal Linux dotfiles focused on shell setup, terminal configuration, and a La
 - `bash/`: shell aliases and environment block injection for `~/.bashrc` (and `~/.zshrc` if present)
 - `alacritty/`, `ghostty/`: terminal emulator configs and setup scripts
 - `git/`: gitconfig setup
-- `arch/`, `manjaro/`, `ubuntu/`: OS-specific install helpers
+- `arch/`: Arch Linux install helpers
 - `local_bin/`: personal scripts to symlink into `~/.local/bin`
 
 ## Quick start
@@ -64,15 +64,13 @@ Neovim entrypoint is `nvim/init.lua`, which loads `nvim/lua/config/lazy.lua`.
 - `nvim/setup.sh` removes files under `~/.config/nvim/lua/plugins/` and `~/.config/nvim/lua/autocommands/` before copying repo files.
 - `bash/setup.sh` rewrites the custom block in your `~/.bashrc` (and `~/.zshrc` if present).
 
-## OS-specific installers
+## Arch installer
 
 - Arch: `arch/*.sh`
-- Manjaro: `manjaro/*.sh`
-- Ubuntu: `ubuntu/*.sh`
 
 Use these scripts selectively; they install system packages and may enable services.
 
 ## Notes
 
-- The root `Makefile` currently references scripts that are not present; prefer running scripts directly.
+- The Arch installer is the only supported OS bootstrap path.
 - `README.md` is intentionally compact. For agent-specific operational guidance, see `AGENTS.md`.

@@ -1,10 +1,7 @@
 #!/bin/bash
 
-# TODO completar proceso de instalacion y configuracion
-sudo pacman -S --noconfirm \
-    zsh
+set -euo pipefail
 
-yay -S --noconfirm zsh-theme-powerlevel10k-git
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-sh -c “$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-
+bash "$SCRIPT_DIR/install_zsh.sh"

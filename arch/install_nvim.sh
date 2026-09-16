@@ -1,9 +1,5 @@
 #!/bin/bash
 
-sudo pacman -S --noconfirm neovim
-sudo pacman -S --noconfirm fd
-sudo pacman -S --noconfirm tree-sitter
-sudo pacman -S --noconfirm tree-sitter-cli
+set -euo pipefail
 
-yay -S --noconfirm tree-sitter-php
-yay -S --noconfirm aur/nodejs-intelephense
+sudo pacman -S --needed --noconfirm neovim fd tree-sitter tree-sitter-cli

@@ -27,6 +27,8 @@ PACKAGES=(
     "code"
     "dry-bin"
     "fastfetch" # neofetch is deprecated; fastfetch is the modern alternative
+    "nodejs-intelephense"
+    "tree-sitter-php"
 )
 
 echo "Updating system and installing packages..."

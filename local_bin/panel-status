@@ -52,7 +52,7 @@ fi
 printf '%s %s %s %s %s\n' \
     "$cpu_total" "$cpu_idle" "$rx" "$now_ms" "$iface" >"$STATE"
 
-# Siempre mostrar red en megabits por segundo
+# Red siempre en MB/s (megabytes por segundo)
 net=$(awk -v b="$net_bps" \
     'BEGIN { printf "%.2f", b / 1000000 }')
 
@@ -69,6 +69,7 @@ psu_hwmon=""
 
 for h in /sys/class/hwmon/hwmon*; do
     [[ -r "$h/name" ]] || continue
+
     name=$(<"$h/name")
 
     case "$name" in
@@ -96,6 +97,7 @@ gpu_data=$(nvidia-smi \
 
 if [[ -n "$gpu_data" ]]; then
     IFS=',' read -r gpu_pct gpu_temp <<<"$gpu_data"
+
     gpu_pct=${gpu_pct// /}
     gpu_temp=${gpu_temp// /}
 else
@@ -120,10 +122,14 @@ else
 fi
 
 # ─── Fixed-width fields ──────────────────────────────────────
-# Carácter invisible real, no whitespace.
-# Evita que Plasma/Qt lo colapse o cambie su ancho.
+#
+# U+2800 = Braille Blank.
+# Visualmente está vacío, pero Plasma/Qt lo conserva como
+# carácter real, evitando que colapse el espacio.
+
 PAD=$'\u2800'
 
+# Relleno a la izquierda
 pad() {
     local width="$1"
     local value="$2"
@@ -140,39 +146,69 @@ pad() {
     printf '%s%s' "$out" "$value"
 }
 
-# Anchos reservados
+# Relleno a la derecha
+rpad() {
+    local width="$1"
+    local value="$2"
+    local len=${#value}
+    local n=$((width - len))
+    local out="$value"
+
+    ((n < 0)) && n=0
+
+    for ((i = 0; i < n; i++)); do
+        out+="$PAD"
+    done
+
+    printf '%s' "$out"
+}
+
+# ─── Campos formateados ──────────────────────────────────────
 #
-# NET:      0.00 → 1000.00 Mb/s
-# RAM:         0 → 100 %
-# CPU/GPU:     0 → 100 %
-# Temp:        0 → 999 °C
-# PSU W:       0 → 1200 W
+# Las unidades forman parte del campo.
+# Así nunca aparece:
+#
+# CPU 6   %
+#
+# sino:
+#
+# CPU 6%
+#
+# El relleno invisible queda DESPUÉS de la unidad.
 
-net_f=$(pad 7 "$net")
-ram_f=$(pad 3 "$ram_pct")
+net_f=$(pad 5 "$net")
 
-cpu_f=$(pad 3 "$cpu_pct")
-cpu_t_f=$(pad 3 "$cpu_temp")
+ram_f=$(rpad 4 "${ram_pct}%")
 
-gpu_f=$(pad 3 "$gpu_pct")
-gpu_t_f=$(pad 3 "$gpu_temp")
+cpu_f=$(rpad 4 "${cpu_pct}%")
+cpu_t_f=$(rpad 5 "${cpu_temp}°C")
 
-psu_v_f=$(pad 5 "$psu_v")
-psu_w_f=$(pad 4 "$psu_w")
-psu_t_f=$(pad 3 "$psu_temp")
+gpu_f=$(rpad 4 "${gpu_pct}%")
+gpu_t_f=$(rpad 5 "${gpu_temp}°C")
+
+psu_v_f="$psu_v"
+psu_w_f=$(rpad 5 "${psu_w}W")
+psu_t_f=$(rpad 5 "${psu_temp}°C")
 
 # ─── Colores ─────────────────────────────────────────────────
-BLUE=$'\e[38;5;12m'    # NET
+BLUE=$'\e[38;5;12m'    # LAN
 CYAN=$'\e[38;5;27m'    # RAM
 ORANGE=$'\e[38;5;202m' # CPU
 GREEN=$'\e[38;5;154m'  # GPU
 PINK=$'\e[38;5;198m'   # PSU
 RESET=$'\e[0m'
 
+# ─── Etiquetas / iconos ──────────────────────────────────────
+NET_ICON='LAN'
+RAM_ICON='RAM'
+CPU_ICON='CPU'
+GPU_ICON='GPU'
+PSU_ICON=''
+
 # ─── Output ──────────────────────────────────────────────────
-printf '%b┃%b NET %s MB/s  %b┃%b RAM %s%%  %b┃%b CPU %s%% %s°C  %b┃%b GPU %s%% %s°C  %b┃%b PSU %sV %sW %s°C\n' \
-    "$BLUE" "$RESET" "$net_f" \
-    "$CYAN" "$RESET" "$ram_f" \
-    "$ORANGE" "$RESET" "$cpu_f" "$cpu_t_f" \
-    "$GREEN" "$RESET" "$gpu_f" "$gpu_t_f" \
-    "$PINK" "$RESET" "$psu_v_f" "$psu_w_f" "$psu_t_f"
+printf '%b┃%b %s %s MB/s  %b┃%b %s %s  %b┃%b %s %s %s  %b┃%b %s %s %s  %b┃%b %s %sV %s %s\n' \
+    "$BLUE" "$RESET" "$NET_ICON" "$net_f" \
+    "$CYAN" "$RESET" "$RAM_ICON" "$ram_f" \
+    "$ORANGE" "$RESET" "$CPU_ICON" "$cpu_f" "$cpu_t_f" \
+    "$GREEN" "$RESET" "$GPU_ICON" "$gpu_f" "$gpu_t_f" \
+    "$PINK" "$RESET" "$PSU_ICON" "$psu_v_f" "$psu_w_f" "$psu_t_f"
