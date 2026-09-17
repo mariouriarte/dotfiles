@@ -56,8 +56,12 @@ install_yay_if_missing
 
 run_script install_apps.sh
 run_script install_kde.sh
+run_script install_multimedia.sh
 run_script install_docker.sh
+run_script install_dev_tools.sh
+run_script install_mobile_dev.sh
 run_script install_nvim.sh
+run_script install_tmux.sh
 run_script install_alacritty.sh
 run_script install_zsh.sh
 run_script install_aur_apps.sh

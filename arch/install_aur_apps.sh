@@ -24,7 +24,6 @@ PACKAGES=(
     "onedrive-abraunegg"
     "samsung-unified-driver-printer"
     "cups-pdf"
-    "code"
     "dry-bin"
     "fastfetch" # neofetch is deprecated; fastfetch is the modern alternative
     "nodejs-intelephense"
