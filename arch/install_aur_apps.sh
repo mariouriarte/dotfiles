@@ -2,23 +2,19 @@
 
 set -euo pipefail
 
-echo "Starting AUR package installation..."
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# Check if yay is installed
-if ! command -v yay &>/dev/null; then
-    echo "Error: 'yay' is not installed. Please install it first."
-    exit 1
-fi
+# shellcheck source=arch/lib/install_report.sh
+source "$SCRIPT_DIR/lib/install_report.sh"
+install_report_init
+
+echo "Starting AUR package installation..."
 
 # Define packages in an array for easier management
 PACKAGES=(
     "brave-bin"
     "slack-desktop"
     "discord"
-    "jdk11-openjdk"
-    "jdk17-openjdk"
-    "jdk21-openjdk"
-    "jdk-openjdk"
     "google-chrome"
     "jdownloader2"
     "onedrive-abraunegg"
@@ -28,9 +24,14 @@ PACKAGES=(
     "fastfetch" # neofetch is deprecated; fastfetch is the modern alternative
     "nodejs-intelephense"
     "tree-sitter-php"
+    "jaspersoftstudio"
+    "jasperstarter"
 )
 
-echo "Updating system and installing packages..."
-yay -S --noconfirm --needed "${PACKAGES[@]}"
+install_yay_packages "${PACKAGES[@]}"
+
+if [[ "${INSTALL_REPORT_OWNED:-0}" == "1" ]]; then
+    install_report_print
+fi
 
 echo "Installation completed successfully!"
