@@ -52,7 +52,7 @@ fi
 printf '%s %s %s %s %s\n' \
     "$cpu_total" "$cpu_idle" "$rx" "$now_ms" "$iface" >"$STATE"
 
-# Red siempre en MB/s (megabytes por segundo)
+# Red siempre en MB/s
 net=$(awk -v b="$net_bps" \
     'BEGIN { printf "%.2f", b / 1000000 }')
 
@@ -62,6 +62,53 @@ mem_available=$(awk '/^MemAvailable:/ {print $2}' /proc/meminfo)
 
 ram_pct=$(awk -v total="$mem_total" -v avail="$mem_available" \
     'BEGIN { printf "%.0f", 100*(total-avail)/total }')
+
+# ─── Top 3 aplicaciones por RAM ──────────────────────────────
+#
+# Agrupa todos los procesos con el mismo nombre.
+# Ejemplo: todos los procesos "brave" se suman.
+#
+# Se muestra una de las tres cada 5 segundos.
+
+APP_NAME_MAX=12
+
+mapfile -t top_mem_apps < <(
+    ps -eo comm=,rss= |
+        awk '
+            {
+                mem[$1] += $2
+            }
+            END {
+                for (app in mem)
+                    print app, mem[app]
+            }
+        ' |
+        sort -k2,2nr |
+        head -n 3
+)
+
+if ((${#top_mem_apps[@]} > 0)); then
+    app_index=$((($(date +%s) / 5) % ${#top_mem_apps[@]}))
+
+    read -r app_name app_kb <<<"${top_mem_apps[$app_index]}"
+
+    # Limitar longitud del nombre
+    if ((${#app_name} > APP_NAME_MAX)); then
+        app_name="${app_name:0:$((APP_NAME_MAX - 1))}…"
+    fi
+
+    # Convertir RAM
+    if ((app_kb >= 1048576)); then
+        app_mem=$(awk -v kb="$app_kb" \
+            'BEGIN { printf "%.1fGB", kb/1048576 }')
+    else
+        app_mem=$(awk -v kb="$app_kb" \
+            'BEGIN { printf "%.0fMB", kb/1024 }')
+    fi
+else
+    app_name="-"
+    app_mem="0MB"
+fi
 
 # ─── Find hwmon devices ──────────────────────────────────────
 cpu_hwmon=""
@@ -125,7 +172,7 @@ fi
 #
 # U+2800 = Braille Blank.
 # Visualmente está vacío, pero Plasma/Qt lo conserva como
-# carácter real, evitando que colapse el espacio.
+# carácter real y evita que se colapsen los espacios.
 
 PAD=$'\u2800'
 
@@ -164,33 +211,32 @@ rpad() {
 }
 
 # ─── Campos formateados ──────────────────────────────────────
-#
-# Las unidades forman parte del campo.
-# Así nunca aparece:
-#
-# CPU 6   %
-#
-# sino:
-#
-# CPU 6%
-#
-# El relleno invisible queda DESPUÉS de la unidad.
 
+# Aplicación
+app_name_f=$(rpad "$APP_NAME_MAX" "$app_name")
+app_mem_f=$(pad 6 "$app_mem")
+
+# Red
 net_f=$(pad 5 "$net")
 
+# RAM
 ram_f=$(rpad 4 "${ram_pct}%")
 
+# CPU
 cpu_f=$(rpad 4 "${cpu_pct}%")
 cpu_t_f=$(rpad 5 "${cpu_temp}°C")
 
+# GPU
 gpu_f=$(rpad 4 "${gpu_pct}%")
 gpu_t_f=$(rpad 5 "${gpu_temp}°C")
 
+# PSU
 psu_v_f="$psu_v"
 psu_w_f=$(rpad 5 "${psu_w}W")
 psu_t_f=$(rpad 5 "${psu_temp}°C")
 
 # ─── Colores ─────────────────────────────────────────────────
+PURPLE=$'\e[38;5;141m' # App RAM
 BLUE=$'\e[38;5;12m'    # LAN
 CYAN=$'\e[38;5;27m'    # RAM
 ORANGE=$'\e[38;5;202m' # CPU
@@ -206,7 +252,8 @@ GPU_ICON='GPU'
 PSU_ICON=''
 
 # ─── Output ──────────────────────────────────────────────────
-printf '%b┃%b %s %s MB/s  %b┃%b %s %s  %b┃%b %s %s %s  %b┃%b %s %s %s  %b┃%b %s %sV %s %s\n' \
+printf '%b┃%b %s %s  %b┃%b %s %s MB/s  %b┃%b %s %s  %b┃%b %s %s %s  %b┃%b %s %s %s  %b┃%b %s %sV %s %s\n' \
+    "$PURPLE" "$RESET" "$app_name_f" "$app_mem_f" \
     "$BLUE" "$RESET" "$NET_ICON" "$net_f" \
     "$CYAN" "$RESET" "$RAM_ICON" "$ram_f" \
     "$ORANGE" "$RESET" "$CPU_ICON" "$cpu_f" "$cpu_t_f" \
